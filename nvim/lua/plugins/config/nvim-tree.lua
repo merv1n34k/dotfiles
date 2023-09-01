@@ -1,4 +1,3 @@
-local keymap = vim.keymap
 local nvim_tree = require("nvim-tree")
 
 nvim_tree.setup {
@@ -43,8 +42,8 @@ nvim_tree.setup {
     args = {},
   },
   diagnostics = {
-    enable = false,
-    show_on_dirs = false,
+    enable = true,
+    show_on_dirs = true,
     icons = {
       hint = "",
       info = "",

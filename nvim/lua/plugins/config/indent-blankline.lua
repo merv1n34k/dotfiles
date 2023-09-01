@@ -1,6 +1,18 @@
 local api = vim.api
 
-local exclude_ft = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha" }
+local exclude_ft = { "help",
+                     "git",
+                     "markdown",
+                     "snippets",
+                     "text",
+                     "gitconfig",
+                     "alpha",
+                     "terminal",
+                     "lspinfo",
+                     "TelescopePrompt",
+                     "TelescopeResults",
+                     "mason"
+                 }
 
 require("indent_blankline").setup {
   -- U+2502 may also be a good choice, it will be on the middle of cursor.

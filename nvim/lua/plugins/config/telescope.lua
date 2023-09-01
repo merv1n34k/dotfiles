@@ -50,4 +50,22 @@ require('telescope').setup{
   },
 
   extensions_list = { "themes", "terms" },
+  extensions = {
+    fzf = {},
+    --[=[frecency = {
+      show_scores = true,
+      show_unindexed = true,
+      ignore_patterns = {"*.git/*", "*/tmp/*","*.DS_Store"},
+      disable_devicons = false,
+      workspaces = {
+        ["conf"]    = "/Users/alexeystroganov/.config",
+        ["data"]    = "/Users/alexeystroganov/.local/share",
+        ["dotf"] = "/Users/alexeystroganov/projects",
+        ["mandor"]    = "/Users/alexeystroganov/Experiments/mandor_exp/mandor_repository"
+      }
+    },--]=]
+  },
 }
+
+-- Load extensions
+require('telescope').load_extension('fzf')

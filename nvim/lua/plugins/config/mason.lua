@@ -1,8 +1,4 @@
-local options = {
-  ensure_installed = { "lua-language-server" }, -- not an option from mason.nvim
-
-  PATH = "skip",
-
+require("mason").setup{
   ui = {
     icons = {
       package_pending = " ",
@@ -21,8 +17,5 @@ local options = {
       cancel_installation = "<C-c>",
     },
   },
-
   max_concurrent_installers = 10,
 }
-
-return options

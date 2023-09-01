@@ -171,6 +171,9 @@ keymap.set('n', '<leader>fg', builtin.live_grep, {})
 keymap.set('n', '<leader>fb', builtin.buffers, {})
 keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+-- frecency ext
+--keymap.set("n", "<leader>fr", "<Cmd>Telescope frecency<CR>")
+
 ----------------------------------------- Bufferline ------------------------------------------
 
 -- Cycle through tabs using <left> and <right>

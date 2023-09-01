@@ -134,11 +134,11 @@ end
 
 --- Use a random colorscheme from the pre-defined list of colorschemes of put your desired colorscheme.
 M.use_colorscheme = function()
-  local colorscheme = "onedarkpro" --utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
+  local colorscheme = utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
 
   if not vim.tbl_contains(vim.tbl_keys(M), colorscheme) then
     local msg = "Invalid colorscheme: " .. colorscheme
-    vim.notify(msg, vim.log.levels.ERROR, { title = "nvim-config" })
+    vim.notify(msg, vim.log.levels.ERROR, { title = "Logrus-nvim" })
 
     return
   end
@@ -148,7 +148,7 @@ M.use_colorscheme = function()
 
   if not status then
     local msg = string.format("Colorscheme %s is not installed. Run PackerSync to install.", colorscheme)
-    vim.notify(msg, vim.log.levels.ERROR, { title = "nvim-config" })
+    vim.notify(msg, vim.log.levels.ERROR, { title = "Logrus-nvim" })
 
     return
   end
@@ -159,7 +159,7 @@ M.use_colorscheme = function()
   if vim.g.logging_level == "debug" then
     local msg = "Colorscheme: " .. colorscheme
 
-    vim.notify(msg, vim.log.levels.DEBUG, { title = "nvim-config" })
+    vim.notify(msg, vim.log.levels.DEBUG, { title = "Logrus-nvim" })
   end
 end
 

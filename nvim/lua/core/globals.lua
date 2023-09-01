@@ -1,4 +1,5 @@
 ----------------------------- builtin variables -------------------------------------------
+vim.g.loaded_python3_provider = 0  -- Disable python3 provider
 vim.g.loaded_perl_provider = 0  -- Disable perl provider
 vim.g.loaded_ruby_provider = 0  -- Disable ruby provider
 vim.g.loaded_node_provider = 0  -- Disable node provider

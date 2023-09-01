@@ -4,7 +4,7 @@ local keymap = vim.keymap
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
 
-local utils = require("utils")
+local utils = require("core.utils")
 
 -- set quickfix list from diagnostics in a certain buffer, not the whole workspace
 local set_qflist = function(buf_num, severity)
@@ -26,6 +26,7 @@ local custom_attach = function(client, bufnr)
     opts.buffer = bufnr
     keymap.set(mode, l, r, opts)
   end
+
 
   map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
   map("n", "<C-]>", vim.lsp.buf.definition)
@@ -169,15 +170,35 @@ end
 --   vim.notify("pyright not found!", vim.log.levels.WARN, {title = 'Nvim-config'})
 -- end
 
-if utils.executable("ltex-ls") then
-  lspconfig.ltex.setup {
+if utils.executable("texlab") then
+  lspconfig.texlab.setup {
     on_attach = custom_attach,
-    cmd = { "ltex-ls" },
-    filetypes = { "text", "plaintex", "tex", "markdown" },
+    cmd = { "texlab" },
+    filetypes = { "tex", "plaintex", "bib" },
     settings = {
-      ltex = {
-        language = "en"
-      },
+      texlab = {
+        auxDirectory = ".",
+        bibtexFormatter = "texlab",
+        build = {
+            args = { "-lualatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            executable = "latexmk",
+            forwardSearchAfter = false,
+            onSave = false
+            },
+        chktex = {
+            onEdit = true,
+            onOpenAndSave = false
+        },
+        diagnosticsDelay = 300,
+        formatterLineLength = 80,
+        forwardSearch = {
+            args = {}
+        },
+        latexFormatter = "latexindent",
+        latexindent = {
+            modifyLineBreaks = false
+        }
+      }
     },
     flags = { debounce_text_changes = 300 },
 }
@@ -192,6 +213,20 @@ if utils.executable("clangd") then
       debounce_text_changes = 500,
     },
   }
+end
+
+if utils.executable("ltex-ls") then
+  lspconfig.ltex.setup {
+    on_attach = custom_attach,
+    cmd = { "ltex-ls" },
+    filetypes = { "text", "plaintex", "tex", "markdown" },
+    settings = {
+      ltex = {
+        language = "en"
+      },
+    },
+    flags = { debounce_text_changes = 300 },
+}
 end
 
 -- set up vim-language-server
@@ -247,27 +282,36 @@ if utils.executable("lua-language-server") then
 end
 
 -- Change diagnostic signs.
-fn.sign_define("DiagnosticSignError", { text = '🆇', texthl = "DiagnosticSignError" })
-fn.sign_define("DiagnosticSignWarn", { text = '⚠️', texthl = "DiagnosticSignWarn" })
-fn.sign_define("DiagnosticSignInfo", { text = 'ℹ️', texthl = "DiagnosticSignInfo" })
-fn.sign_define("DiagnosticSignHint", { text = '', texthl = "DiagnosticSignHint" })
+fn.sign_define("DiagnosticSignError", { text = 'x', texthl = "DiagnosticSignError" })
+fn.sign_define("DiagnosticSignWarn", { text = '!', texthl = "DiagnosticSignWarn" })
+fn.sign_define("DiagnosticSignInfo", { text = 'i', texthl = "DiagnosticSignInfo" })
+fn.sign_define("DiagnosticSignHint", { text = '>', texthl = "DiagnosticSignHint" })
+
+vim.cmd([[highlight DiagnosticVirtualTextError guibg=none]])
+vim.cmd([[highlight DiagnosticVirtualTextWarn guibg=none]])
+vim.cmd([[highlight DiagnosticVirtualTextInfo guibg=none]])
+vim.cmd([[highlight DiagnosticVirtualTextHint guibg=none]])
 
 -- global config for diagnostic
 diagnostic.config {
-  underline = false,
-  virtual_text = false,
-  signs = true,
-  severity_sort = true,
+    signs = true,
+    underline = true,
+    virtual_text = true,
+    virtual_lines = false,
+    update_in_insert = true,
+    float = {
+      -- UI.
+      header = false,
+      border = 'rounded',
+      focusable = false,
+    },
 }
-
--- lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
---   underline = false,
---   virtual_text = false,
---   signs = true,
---   update_in_insert = false,
--- })
 
 -- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
 lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
+  border = "double",
+})
+
+lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
+    border = "rounded",
 })

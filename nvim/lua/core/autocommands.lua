@@ -106,8 +106,26 @@ autocmd({ "BufWritePre" }, {
   end,
 })
 
+autocmd("BufEnter", {
+	pattern = "*",
+	group = augroup("AutoCloseWin", { clear = true }),
+	callback = function()
+        local quit_filetypes = {'qf', 'vista', 'NvimTree'}
+        local should_quit = true
 
--- should you add this???
--- augroup("git_repo_check", { clear = true })
--- autocmd VimEnter,DirChanged * call utils#Inside_git_repo()
+        local tabwins = vim.api.nvim_tabpage_list_wins(0)
+        for _, w in ipairs(tabwins) do
+            local buf = vim.api.nvim_win_get_buf(w)
+            local bf = vim.fn.getbufvar(buf, '&filetype')
 
+            if vim.fn.index(quit_filetypes, bf) == -1 then
+                should_quit = false
+            break
+            end
+        end
+
+        if should_quit then
+            vim.cmd('qall')
+        end
+    end,
+})

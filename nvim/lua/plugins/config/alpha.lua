@@ -28,6 +28,7 @@ function M.setup()
   dashboard.section.buttons.val = {
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
     dashboard.button("f", "  Find File", ":Telescope find_files<CR>"),
+    dashboard.button("w", "󰈭  Find Word", "<cmd>Telescope live_grep<CR>"),
     dashboard.button("r", "  Recent Files", "<cmd>Telescope oldfiles<CR>"),
     dashboard.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
     dashboard.button("u", "  Update Plugins", "<cmd>PackerUpdate<CR>"),

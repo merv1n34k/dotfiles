@@ -1,6 +1,9 @@
 local api = vim.api
 local fn = vim.fn
 
+--vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=none]])
+--vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=#d3c6aa guibg=none]])
+
 -- The root dir to install all plugins. Plugins are under opt/ or start/ sub-directory.
 vim.g.plugin_home = fn.stdpath("data") .. "/site/pack/packer"
 
@@ -15,6 +18,7 @@ local function packer_ensure_install()
   if fn.glob(packer_dir) ~= "" then
     return false
   end
+
 
   -- Auto-install packer in case it hasn't been installed.
   vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
@@ -40,50 +44,40 @@ packer.startup {
 
 ----------------------------------------- LSP + CMP ----------------------------------------------------
 
-    --[==[
-
     use { "onsails/lspkind-nvim", event = "VimEnter" }
     -- auto-completion engine
     use { "hrsh7th/nvim-cmp", after = "lspkind-nvim", config = [[require('plugins.config.nvim-cmp')]] }
 
     -- nvim-cmp completion sources
+    use { "saadparwaiz1/cmp_luasnip", after="nvim-cmp"}
     use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }
     use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
     use { "hrsh7th/cmp-omni", after = "nvim-cmp" }
-    use { "quangnguyen30192/cmp-nvim-ultisnips", after = { "nvim-cmp", "ultisnips" } }
     use { "hrsh7th/cmp-emoji", after = "nvim-cmp" }
+    -- Great snippet engine
+    use {"L3MON4D3/LuaSnip",
+        requires = { "rafamadriz/friendly-snippets",},
+        event = { "TextChanged, TextChangedI" },
+        config = function()
+            vim.defer_fn(function()
+            require("plugins.config.luasnip")
+            end, 2000)
+        end,
+        after = "nvim-cmp"}
 
     -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
     use { "neovim/nvim-lspconfig", after = "cmp-nvim-lsp", config = [[require('plugins.config.lsp')]] }
 
-    --]==]
-    --
---[=[ lsp stuff from NvChad
+    -- lsp manager
     use { "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    opts = function()
-      return require "plugins.configs.mason"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "mason")
-      require("mason").setup(opts)
-
-      -- custom nvchad cmd to install all mason binaries listed
-      vim.api.nvim_create_user_command("MasonInstallAll", function()
-        vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
-      end, {})
-
-      vim.g.mason_binaries_list = opts.ensure_installed
-    end,
+    config = [[require('plugins.config.mason')]]
     }
 
     use { "ii14/emmylua-nvim", ft = "lua" }
 
     use { "j-hui/fidget.nvim", after = "nvim-lspconfig", tag = "legacy", config = [[require('plugins.config.fidget-nvim')]] }
-
-
-    --]=]
 
 ---------------------------------------------- colorschemes -------------------------------------------------
 
@@ -107,8 +101,6 @@ packer.startup {
 
 
     -- File search, tag search and more
-    -- use { "Yggdroot/LeaderF", cmd = "Leaderf", run = ":LeaderfInstallCExtension" }
-
     use {
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
@@ -120,6 +112,17 @@ packer.startup {
       end,
       requires = { { "nvim-lua/plenary.nvim" } },
     }
+
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    -- Setup later
+    --[=[use {
+        "nvim-telescope/telescope-frecency.nvim",
+        config = function()
+            require("telescope").load_extension "frecency"
+        end,
+        requires = { "kkharji/sqlite.lua" },
+    }--]=]
 
     use {
       "nvim-lualine/lualine.nvim",
@@ -145,10 +148,6 @@ packer.startup {
       config = [[require('plugins.config.indent-blankline')]],
     }
 
-    -- Snippet engine and snippet template
-    -- use { "SirVer/ultisnips", event = "InsertEnter" }
-    -- use { "honza/vim-snippets", after = "ultisnips" }
-
     use { "lervag/vimtex", ft = { "tex" } }
 
     use {
@@ -168,7 +167,7 @@ packer.startup {
     }
     use { "nvim-tree/nvim-web-devicons"}
 
-
+    -- REPL for nvim
     use {
       'Vigemus/iron.nvim',
       config = [[require('plugins.config.iron')]],
@@ -200,15 +199,15 @@ packer.startup {
     use { "machakann/vim-swap", event = "VimEnter" }
 
     -- Super fast buffer jump
-    --[[use {
+    use {
       "phaazon/hop.nvim",
       event = "VimEnter",
       config = function()
         vim.defer_fn(function()
-          require("config.nvim_hop")
+          require("plugins.config.nvim-hop")
         end, 2000)
       end,
-    } --]]
+    }
 
     -- Automatic insertion and deletion of a pair of characters
     use { "Raimondi/delimitMate", event = "InsertEnter" }
@@ -220,46 +219,30 @@ packer.startup {
     use { "907th/vim-auto-save", event = "InsertEnter" }
 
     -- Show undo history visually
-    use { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } }
+    --use { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } }
 
     -- Handy unix command inside Vim (Rename, Move etc.)
-    use { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } }
+    --use { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } }
 
     -- Repeat vim motions
     use { "tpope/vim-repeat", event = "VimEnter" }
-
-    -- The missing auto-completion for cmdline!
-    use { "gelguy/wilder.nvim", opt = true, setup = [[vim.cmd('packadd wilder.nvim')]] }
-
-    -- showing keybindings
-    --[[use {
-      "folke/which-key.nvim",
-      event = "VimEnter",
-      config = function()
-        vim.defer_fn(function()
-          require("config.which-key")
-        end, 2000)
-      end,
-    }]]
 
     -- show and trim trailing whitespaces
     use { "jdhao/whitespace.nvim", event = "VimEnter" }
 
     -- Plugin to manipulate character pairs quickly
-    -- use { "machakann/vim-sandwich", event = "VimEnter" }
+    use { "machakann/vim-sandwich", event = "VimEnter" }
 
------------------------------------------- other ----------------------------------------------------
-
-   -- notification plugin
-   --[[ use {
+    -- notification plugin
+    use {
       "rcarriga/nvim-notify",
       event = "BufEnter",
       config = function()
         vim.defer_fn(function()
-          require("config.nvim-notify")
+          require("plugins.config.nvim-notify")
         end, 2000)
       end,
-    } --]]
+    }
 
     -- Show match number and index for searching
     use {
@@ -284,6 +267,24 @@ packer.startup {
 
     use { "nvim-zh/better-escape.vim", event = { "InsertEnter" } }
 
+    -- Add indent object for vim (useful for languages like Python)
+    --use { "michaeljsmith/vim-indent-object", event = "VimEnter" }
+
+    -- Modern matchit implementation
+    use { "andymass/vim-matchup", event = "VimEnter" }
+
+    --use { "tpope/vim-scriptease", cmd = { "Scriptnames", "Message", "Verbose" } }
+
+    -- Asynchronous command execution
+    use { "skywind3000/asyncrun.vim", opt = true, cmd = { "AsyncRun" } }
+
+    use { "cespare/vim-toml", ft = { "toml" }, branch = "main" }
+
+    -- Session management plugin
+    --use { "tpope/vim-obsession", cmd = "Obsession" }
+
+------------------------------------------ unused plugins -------------------------------------------
+--
     -- Another markdown plugin
     -- use { "preservim/vim-markdown", ft = { "markdown" } }
 
@@ -293,29 +294,25 @@ packer.startup {
     -- Vim tabular plugin for manipulate tabular, required by markdown plugins
     -- use { "godlygeek/tabular", cmd = { "Tabularize" } }
 
-    --[=[
 
     -- Auto format tools
-    use { "sbdchd/neoformat", cmd = { "Neoformat" } }
+    --use { "sbdchd/neoformat", cmd = { "Neoformat" } }
 
 
-    -- use { "folke/zen-mode.nvim", cmd = "ZenMode", config = [[require('plugins.config.zen-mode')]] }
+    -- The missing auto-completion for cmdline!
+    --use { "gelguy/wilder.nvim", opt = true, setup = [[vim.cmd('packadd wilder.nvim')]] }
 
-    -- Add indent object for vim (useful for languages like Python)
-    use { "michaeljsmith/vim-indent-object", event = "VimEnter" }
+    -- showing keybindings
+    --[[use {
+      "folke/which-key.nvim",
+      event = "VimEnter",
+      config = function()
+        vim.defer_fn(function()
+          require("config.which-key")
+        end, 2000)
+      end,
+    }]]
 
-    -- Modern matchit implementation
-    use { "andymass/vim-matchup", event = "VimEnter" }
-
-    use { "tpope/vim-scriptease", cmd = { "Scriptnames", "Message", "Verbose" } }
-
-    -- Asynchronous command execution
-    use { "skywind3000/asyncrun.vim", opt = true, cmd = { "AsyncRun" } }
-
-    use { "cespare/vim-toml", ft = { "toml" }, branch = "main" }
-
-    -- Session management plugin
-    use { "tpope/vim-obsession", cmd = "Obsession" } ]=]
 
 
     end,
@@ -334,18 +331,18 @@ else
   local status, _ = pcall(require, "packer_compiled")
   if not status then
     local msg = "File packer_compiled.lua not found: run PackerSync to fix!"
-    vim.notify(msg, vim.log.levels.ERROR, { title = "Test-nvim" })
+    vim.notify(msg, vim.log.levels.ERROR, { title = "Logrus-nvim" })
   end
 end
 
 -- Auto-generate packer_compiled.lua file
 api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = "*/nvim/lua/plugins.lua",
+  pattern = "*/nvim/lua/plugins/plugins.lua",
   group = api.nvim_create_augroup("packer_auto_compile", { clear = true }),
   callback = function(ctx)
     local cmd = "source " .. ctx.file
     vim.cmd(cmd)
     vim.cmd("PackerCompile")
-    vim.notify("PackerCompile done!", vim.log.levels.INFO, { title = "Test-nvim" })
+    vim.notify("PackerCompile done!", vim.log.levels.INFO, { title = "Logrus-nvim" })
   end,
 })

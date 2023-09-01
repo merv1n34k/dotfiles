@@ -1,9 +1,9 @@
 # TODO:
 
-    - Add LuaSnip
-    - lAdd CMP and LSP
-    - configure markdown
-    - clean up plugins.lua
-    - add snippets
-    - configure telescope, delete/configure which leaderF
-    - configure which-key
+    - [X] Add LuaSnip
+    - [X] Add CMP and LSP
+    - [ ] Configure markdown
+    - [X] Clean up plugins.lua
+    - [ ] Add custom snippets for tex
+    - [ ] Configure telescope, delete/configure which leaderF
+    - [ ] Configure which-key and wilder
