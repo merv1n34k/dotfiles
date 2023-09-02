@@ -106,7 +106,7 @@ autocmd({ "BufWritePre" }, {
   end,
 })
 
-autocmd("BufEnter", {
+--[[autocmd("BufEnter", {
 	pattern = "*",
 	group = augroup("AutoCloseWin", { clear = true }),
 	callback = function()
@@ -128,4 +128,4 @@ autocmd("BufEnter", {
             vim.cmd('qall')
         end
     end,
-})
+})]]

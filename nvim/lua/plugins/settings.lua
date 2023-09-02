@@ -21,16 +21,16 @@ g.UltiSnipsSnippetDirectories={'UltiSnips', 'my_snippets'}
 --]]
 
 ------------------------------------- vim-mundo  ----------------------------------------------
-g.mundo_verbose_graph = 0
-g.mundo_width = 80
+--g.mundo_verbose_graph = 0
+--g.mundo_width = 80
 
-keymap.set('n', '<Space>u', ':MundoToggle<CR>', { noremap = true, silent = true })
+--keymap.set('n', '<Space>u', ':MundoToggle<CR>', { noremap = true, silent = true })
 
 ------------------------------------- better-escape.vim --------------------------------------------------
 g.better_escape_interval = 200
 ------------------------------------- neoformat  ----------------------------------------------
 
-g.neoformat_enabled_python = {'black', 'yapf'}
+--g.neoformat_enabled_python = {'black', 'yapf'}
 
 --[[g.neoformat_cpp_clangformat = {
       \ 'exe': 'clang-format',
@@ -93,22 +93,28 @@ g.vimtex_compiler_engine = 'lualatex'
 
 -- Add custom mapping for Mandor project
 
-keymap.set('i', "<C-f>", [[<Esc><Cmd>lua vim.cmd('!mandor inkscape --create-figure "'..vim.fn.getline('.')..'" start > /dev/null 2>&1')<CR><Cmd>pw<CR>]],
+keymap.set('i', "<C-f>", [[<Esc><Cmd>lua vim.cmd('!mandor inkscape --create-figure "'..vim.fn.getline('.')..'" start > /dev/null 2>&1')<CR><Cmd>w<CR>]],
     { noremap = true,
       silent = true,
       desc = "Create a figure using Mandor",
 })
 
-keymap.set('n', "<C-f>", "<cmd>!mandor inkscape start<cr><cr><cmd>redraw!<cr><cmd>p<cr>",
+keymap.set('n', "<C-f>", "<cmd>!mandor inkscape start<cr><cr><cmd>redraw!<cr>",
     { noremap = true,
       silent = true,
       desc = "Edit a figure using Mandor",
 })
 
+keymap.set('n', "<S-f>", "<cmd>!mandor inkscape paste<cr><cr><cmd>redraw!<cr>",
+    { noremap = true,
+      silent = true,
+      desc = "Add a figure using Mandor",
+})
+
 -------------------------------- whitespace.nvim --------------------------
 
 -- Remove trailing whitespace characters
-keymap.set("n", "<leader><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
+keymap.set("n", "<space><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
 
 ---------------------------------------------wilder.nvim ------------------------------------------
 
@@ -190,94 +196,3 @@ keymap.set("n", "<space>s", require("nvim-tree.api").tree.toggle, {
   silent = true,
   desc = "toggle nvim-tree",
 })
-
-------------------------------------------- LeaderF ------------------------------
-
---[[
--- Do not use cache file
-g.Lf_UseCache = 0
--- Refresh each time we call leaderf
-g.Lf_UseMemoryCache = 0
-
--- Ignore certain files and directories when searching files
-g.Lf_WildIgnore = {
-  'dir': {'.git', '__pycache__', '.DS_Store', '*_cache'},
-  'file': {'*.exe', '*.dll', '*.so', '*.o', '*.pyc', '*.jpg', '*.png',
-  '*.gif', '*.svg', '*.ico', '*.db', '*.tgz', '*.tar.gz', '*.gz',
-  '*.zip', '*.bin', '*.pptx', '*.xlsx', '*.docx', '*.pdf', '*.tmp',
-  '*.wmv', '*.mkv', '*.mp4', '*.rmvb', '*.ttf', '*.ttc', '*.otf',
-  '*.mp3', '*.aac'}
-  }
-
-g.Lf_ShowDevIcons = 1
-
--- Only fuzzy-search files names
-g.Lf_DefaultMode = 'FullPath'
-
--- Popup window settings
-let w = float2nr(&columns * 0.8)
-if w > 140
-  g.Lf_PopupWidth = 140
-else
-  g.Lf_PopupWidth = w
-endif
-
-g.Lf_PopupPosition = [0, float2nr((&columns - g.Lf_PopupWidth)/2)]
-
--- Do not use version control tool to list files under a directory since
--- submodules are not searched by default.
-g.Lf_UseVersionControlTool = 0
-
--- Use rg as the default search tool
-g.Lf_DefaultExternalTool = "rg"
-
--- show dot files
-g.Lf_ShowHidden = 1
-
--- Disable default mapping
-g.Lf_ShortcutF = ''
-g.Lf_ShortcutB = ''
-
--- set up working directory for git repository
-g.Lf_WorkingDirectoryMode = 'a'
-
--- Search files in popup window
-nnoremap <silent> <leader>ff :<C-U>Leaderf file --popup<CR>
-
--- Grep project files in popup window
-nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages --popup<CR>
-
--- Search vim help files
-nnoremap <silent> <leader>fh :<C-U>Leaderf help --popup<CR>
-
--- Search tags in current buffer
-nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag --popup<CR>
-
--- Switch buffers
-nnoremap <silent> <leader>fb :<C-U>Leaderf buffer --popup<CR>
-
--- Search recent files
-nnoremap <silent> <leader>fr :<C-U>Leaderf mru --popup --absolute-path<CR>
-
-g.Lf_PopupColorscheme = 'gruvbox'
-
--- Change keybinding in LeaderF prompt mode, use ctrl-n and ctrl-p to navigate
--- items.
-g.Lf_CommandMap = {'<C-J>': ['<C-N>'], '<C-K>': ['<C-P>']}
-
--- do not preview results, it will add the file to buffer list
-g.Lf_PreviewResult = {
-      'File': 0,
-      'Buffer': 0,
-      'Mru': 0,
-      'Tag': 0,
-      'BufTag': 1,
-      'Function': 1,
-      'Line': 0,
-      'Colorscheme': 0,
-      'Rg': 0,
-      'Gtags': 0
-      }
---]]
-
-

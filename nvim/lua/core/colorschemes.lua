@@ -21,6 +21,9 @@ M.colorscheme2dir = {
   onedarkpro = "onedarkpro.nvim",
   monokai = "monokai.nvim",
   material = "material.nvim",
+  neon = "neon",
+  blue_moon = "blue-moon",
+  aurora = "aurora",
 }
 
 M.gruvbox8 = function()
@@ -118,6 +121,29 @@ M.rose_pine = function()
   vim.cmd('colorscheme rose-pine')
 end
 
+M.neon = function ()
+  vim.g.neon_style = "default"
+  vim.g.neon_italic_keyword = true
+  vim.g.neon_italic_function = true
+  vim.g.neon_transparent = true
+
+  -- set colorscheme after options
+  vim.cmd[[colorscheme neon]]
+end
+
+M.blue_moon = function ()
+    vim.cmd[[colorscheme blue-moon]]
+end
+
+M.aurora = function ()
+  vim.g.aurora_italic = 1 -- italic
+  vim.g.aurora_transparent = 1 -- transparent
+  vim.g.aurora_bold = 1 -- bold
+  vim.g.aurora_darker = 1 -- darker background
+
+  vim.cmd[[colorscheme aurora]]
+end
+
 M.onedarkpro = function()
   -- set colorscheme after options
   vim.cmd('colorscheme onedark_vivid')
@@ -134,7 +160,8 @@ end
 
 --- Use a random colorscheme from the pre-defined list of colorschemes of put your desired colorscheme.
 M.use_colorscheme = function()
-  local colorscheme = utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
+  local colorscheme = "blue_moon"-- utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
+
 
   if not vim.tbl_contains(vim.tbl_keys(M), colorscheme) then
     local msg = "Invalid colorscheme: " .. colorscheme
@@ -156,10 +183,10 @@ M.use_colorscheme = function()
   -- Load the colorscheme and its settings
   M[colorscheme]()
 
-  if vim.g.logging_level == "debug" then
-    local msg = "Colorscheme: " .. colorscheme
+  if vim.g.logging_level == "info" then
+    local msg = "Loaded colorscheme: " .. colorscheme
 
-    vim.notify(msg, vim.log.levels.DEBUG, { title = "Logrus-nvim" })
+    vim.notify(msg, vim.log.levels.INFO, { title = "Logrus-nvim" })
   end
 end
 

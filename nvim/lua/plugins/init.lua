@@ -3,4 +3,4 @@
 require "plugins.plugins"
 
 -- settings for plugins
-require "plugins.settings" 
+require "plugins.settings"

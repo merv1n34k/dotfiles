@@ -13,6 +13,7 @@
 
   -- lua format
   require("luasnip.loaders.from_lua").lazy_load()
+  require("luasnip.loaders.from_lua").load({paths = "./snippets"})
   --require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
 
   --[=[vim.api.nvim_create_autocmd("InsertLeave", {

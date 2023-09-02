@@ -96,6 +96,10 @@ packer.startup {
     use { "olimorris/onedarkpro.nvim", opt = true }
     use { "tanvirtin/monokai.nvim", opt = true }
     use { "marko-cerovac/material.nvim", opt = true }
+    use { "rafamadriz/neon", opt = true }
+    use { "kyazdani42/blue-moon", opt = true }
+    use { 'ray-x/aurora', opt = true }
+
 
 -------------------------------------------- Important ---------------------------------------------------
 
@@ -236,7 +240,7 @@ packer.startup {
     -- notification plugin
     use {
       "rcarriga/nvim-notify",
-      event = "BufEnter",
+      --event = "VimEnter",
       config = function()
         vim.defer_fn(function()
           require("plugins.config.nvim-notify")
@@ -271,7 +275,7 @@ packer.startup {
     --use { "michaeljsmith/vim-indent-object", event = "VimEnter" }
 
     -- Modern matchit implementation
-    use { "andymass/vim-matchup", event = "VimEnter" }
+    --use { "andymass/vim-matchup", event = "VimEnter" }
 
     --use { "tpope/vim-scriptease", cmd = { "Scriptnames", "Message", "Verbose" } }
 
