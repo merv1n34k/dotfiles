@@ -1,9 +1,11 @@
-# TODO:
+# NVIM CONFIG
+
+# ROADMAP:
 
     - [X] Add LuaSnip
     - [X] Add CMP and LSP
+    - [ ] Clean up plugins.lua
+    - [ ] Add custom snippets for tex
+    - [ ] Configure telescope and its extensions
     - [ ] Configure markdown
-    - [X] Clean up plugins.lua
-    - [X] Add custom snippets for tex
-    - [X] Configure telescope, delete/configure which leaderF
     - [ ] Configure which-key and wilder

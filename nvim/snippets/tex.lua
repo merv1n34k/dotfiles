@@ -1,4 +1,5 @@
--- Create basic LaTeX template (test only!!!!!)
+-- THIS FILE IS MERELY A PLAYGROUND!!! --
+
 local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
@@ -30,7 +31,7 @@ local k = require("luasnip.nodes.key_indexer").new_key
 local function fn(
   args,     -- text from i(2) in this example i.e. { { "456" } }
   parent,   -- parent snippet or parent node
-  user_args -- user_args from opts.user_args 
+  user_args -- user_args from opts.user_args
 )
     local _,wc = args[1][1]:gsub("%S+","")
         local test = {"", "You have typed " .. wc .. " words!"}

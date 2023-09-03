@@ -1,6 +1,5 @@
 vim.loader.enable() -- enable nvim experimental loader ://
 
-
 require "core" --[[ Init following settings:
 
   globals -- global settings
