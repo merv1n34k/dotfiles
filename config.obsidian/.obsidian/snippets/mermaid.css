@@ -1,0 +1,52 @@
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make mindmap colors readable */
+.mermaid svg text{
+    fill: black !important;
+    --color-red: #ff7777 !important;
+    --color-orange: #ffbb99 !important;
+    --color-yellow: #ffeeaa !important;
+    --color-green: #bbffbb !important;
+    --color-cyan: #bbffee !important;
+    --color-blue: #aaccff !important;
+    --color-purple: #ddbbff !important;
+    --color-pink: #ffcccc !important;
+}
+
+/* Move and scale mermaid diagrams */
+svg[id^="m"][width][height][viewBox] {
+    max-width: 95%;
+    max-height: 95%;
+}
+
+div.mermaid {
+    margin-left: 0 !important;
+    text-align: center;
+    resize:both;
+    overflow:hidden;
+    margin-bottom: 0px;
+    position:relative;
+    /*
+     * Limit graph height
+     * max-height: 600px;*/
+    min-height: 200px;
+    max-width: 100%;
+    min-width: 25%;
+}
+
+div.mermaid::after {
+    content:'';
+    display:block;
+    width:15px;
+    height:15px;
+    background-color:var(--text-accent);
+    position:absolute;
+    right:0;
+    bottom:0;
+    border-radius: 100%;
+}
+
+

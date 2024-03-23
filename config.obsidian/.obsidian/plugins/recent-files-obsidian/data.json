@@ -1,0 +1,23 @@
+{
+  "recentFiles": [
+    {
+      "basename": "template_lectures",
+      "path": "Templates/template_lectures.md"
+    },
+    {
+      "basename": "template",
+      "path": "Templates/template.md"
+    },
+    {
+      "basename": "Reference template v2",
+      "path": "Templates/Reference template v2.md"
+    },
+    {
+      "basename": "Reference template",
+      "path": "Templates/Reference template.md"
+    }
+  ],
+  "omittedPaths": [],
+  "maxLength": null,
+  "openType": "tab"
+}

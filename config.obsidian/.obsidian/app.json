@@ -1,0 +1,26 @@
+{
+  "vimMode": true,
+  "pdfExportSettings": {
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "livePreview": false,
+  "defaultViewMode": "source",
+  "strictLineBreaks": true,
+  "readableLineLength": true,
+  "showLineNumber": true,
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "rightToLeft": false,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showIndentGuide": true,
+  "spellcheck": false,
+  "autoPairMarkdown": true,
+  "smartIndentList": true,
+  "autoConvertHtml": true,
+  "newFileLocation": "current",
+  "attachmentFolderPath": "Data/Attachments"
+}

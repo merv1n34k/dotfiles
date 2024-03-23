@@ -1,5 +1,3 @@
 # Ignore .DS_Store
 
 **/*.DS_Store
-
-nvim/*.DS_Store

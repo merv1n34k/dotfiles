@@ -106,11 +106,13 @@ local custom_attach = function(client, bufnr)
 
   if vim.g.logging_level == "debug" then
     local msg = string.format("Language server %s started!", client.name)
-    vim.notify(msg, vim.log.levels.DEBUG, { title = "Nvim-config" })
+    vim.notify(msg, vim.log.levels.DEBUG, { title = "Logrus-nvim" })
   end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+--Enable (broadcasting) snippet capability for completion
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local lspconfig = require("lspconfig")
 
@@ -158,7 +160,7 @@ if utils.executable("pylsp") then
     capabilities = capabilities,
   }
 else
-  vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+  vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Logrus-nvim" })
 end
 
 -- if utils.executable('pyright') then
@@ -239,7 +241,7 @@ if utils.executable("vim-language-server") then
     capabilities = capabilities,
   }
 else
-  vim.notify("vim-language-server not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+  vim.notify("vim-language-server not found!", vim.log.levels.WARN, { title = "Logrus-nvim" })
 end
 
 -- set up bash-language-server
@@ -279,6 +281,19 @@ if utils.executable("lua-language-server") then
     },
     capabilities = capabilities,
   }
+else
+  vim.notify("lua-language-server not found!", vim.log.levels.WARN, { title = "Logrus-nvim" })
+end
+
+
+
+if utils.executable("vscode-css-language-server") then
+  lspconfig.cssls.setup {
+    on_attach = custom_attach,
+    capabilities = capabilities,
+  }
+else
+  vim.notify("css-language-server not found!", vim.log.levels.WARN, { title = "Logrus-nvim" })
 end
 
 -- Change diagnostic signs.

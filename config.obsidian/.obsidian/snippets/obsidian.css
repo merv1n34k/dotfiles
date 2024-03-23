@@ -1,0 +1,8 @@
+
+/* Bigger popups */
+body {
+--popover-width: 1000px;
+--popover-height: 800px;
+--popover-max-height: 80vh;
+--popover-max-widtg: 80vw
+}

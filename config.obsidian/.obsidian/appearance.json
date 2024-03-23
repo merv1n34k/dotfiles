@@ -1,0 +1,23 @@
+{
+  "accentColor": "",
+  "translucency": false,
+  "cssTheme": "AnuPpuccin",
+  "theme": "obsidian",
+  "enabledCssSnippets": [
+    "tables",
+    "custom-admonitions.52632b",
+    "obsidian",
+    "mermaid",
+    "checkboxes",
+    "callouts",
+    "cornell",
+    "poems",
+    "poetry",
+    "tables_v2"
+  ],
+  "interfaceFontFamily": "",
+  "textFontFamily": "Inter",
+  "monospaceFontFamily": "FiraCode Nerd Font Mono",
+  "showViewHeader": true,
+  "baseFontSize": 24
+}

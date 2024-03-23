@@ -104,7 +104,7 @@ end
 
 M.catppuccin = function()
   -- available option: latte, frappe, macchiato, mocha
-  vim.g.catppuccin_flavour = "frappe"
+  vim.g.catppuccin_flavour = "mocha"
 
   require("catppuccin").setup()
 
@@ -160,7 +160,7 @@ end
 
 --- Use a random colorscheme from the pre-defined list of colorschemes of put your desired colorscheme.
 M.use_colorscheme = function()
-  local colorscheme = utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
+  local colorscheme = "catppuccin" -- utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
 
 
   if not vim.tbl_contains(vim.tbl_keys(M), colorscheme) then

@@ -1,0 +1,42 @@
+/** Place this file in your $VAULT_NAME/.obsidian/snippets/ and enable the snippet in the Appearance Settings **/
+
+:root {
+    --poem-offset:200px;
+}
+
+/* verses text */
+.markdown-preview-view.poetry4 div:has(> p),
+.markdown-preview-view.poetry3 div:has(> p),
+.markdown-preview-view.poetry2 div:has(> p) {
+    font-style: italic;
+    text-align: left;
+    margin-left:var(--poem-offset);
+}
+
+/* verses text */
+.markdown-preview-view.poetry4 p,
+.markdown-preview-view.poetry3 p,
+.markdown-preview-view.poetry2 p {
+    font-size: 1em;
+    font-style: italic;
+    text-align: left;
+    margin: 0;
+}
+
+/* verses text */
+.markdown-preview-view.poetry4 div:nth-child(4n+3)::after {
+    content: "\a";
+    white-space: pre;
+}
+
+/* verses text */
+.markdown-preview-view.poetry3 div:nth-child(3n)::after {
+    content: "\a";
+    white-space: pre;
+}
+
+/* verses text */
+.markdown-preview-view.poetry2 div:nth-child(2n+1)::after {
+    content: "\a";
+    white-space: pre;
+}

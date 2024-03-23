@@ -1,0 +1,63 @@
+{
+  "userAdmonitions": {
+    "md": {
+      "type": "md",
+      "color": "122, 144, 76",
+      "icon": {
+        "type": "obsidian",
+        "name": "lucide-info"
+      },
+      "command": false,
+      "title": "Metadata",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": true
+    },
+    "LINK": {
+      "type": "LINK",
+      "color": "106, 30, 200",
+      "icon": {
+        "type": "obsidian",
+        "name": "link"
+      },
+      "command": false,
+      "title": "Link",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": true
+    },
+    "Synth": {
+      "type": "Synth",
+      "color": "65, 109, 60",
+      "icon": {
+        "type": "obsidian",
+        "name": "lucide-test-tubes"
+      },
+      "command": false,
+      "title": "Synthesis",
+      "injectColor": true,
+      "noTitle": false
+    }
+  },
+  "syntaxHighlight": false,
+  "copyButton": true,
+  "version": "10.1.1",
+  "autoCollapse": false,
+  "defaultCollapseType": "open",
+  "injectColor": true,
+  "parseTitles": true,
+  "dropShadow": true,
+  "hideEmpty": false,
+  "open": {
+    "admonitions": true,
+    "icons": true,
+    "other": true,
+    "advanced": false
+  },
+  "icons": [],
+  "useFontAwesome": true,
+  "rpgDownloadedOnce": false,
+  "msDocConverted": false,
+  "useSnippet": true,
+  "snippetPath": "custom-admonitions.52632b"
+}

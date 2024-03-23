@@ -1,0 +1,115 @@
+/** Place this file in your $VAULT_NAME/.obsidian/snippets/ and enable the snippet in the Appearance Settings **/
+
+
+:root {
+    --cue-width: 150px;
+    --cue-offset: var(--cue-width);
+    --cue-line: 1px solid lightgrey;
+}
+
+.markdown-preview-view.cornell-note .markdown-preview-sizer,
+.markdown-source-view.cornell-note .markdown-preview-sizer {
+    max-width: var(--file-line-width);
+    margin-left: auto;
+    margin-right: auto;
+    margin-inline: 150px;
+    width: 100%;
+}
+
+.markdown-preview-view.cornell-note .markdown-preview-sizer > div {
+    max-width: var(--max-width);
+    width: var(--line-width);
+    margin-inline: var(--content-margin)!important;
+}
+
+.markdown-preview-view.cornell-border .markdown-preview-sizer > div:has(p, ul, ol, pre) {
+    border-left: var(--cue-line);
+    padding-left: 20px;
+}
+
+.markdown-preview-view.cornell-note div.cues-header {
+    /* Keep sync with "h1, .markdown-rendered h1" selector */
+    position: absolute;
+    max-width: var(--cue-width);
+    width: var(--cue-width);
+    left: 15px;
+    margin:auto;
+    top: 20;
+    padding: 0px 8px 0px 0px;
+    letter-spacing: -0.015em;
+    line-height: var(--h1-line-height);
+    color: var(--h1-color);
+    font-family: var(--h1-font);
+    font-size: var(--h1-size);
+    font-style: var(--h1-style);
+    font-variant: var(--h1-variant);
+    font-weight: var(--h1-weight);
+}
+
+
+/* Cue callout setup */
+.markdown-preview-view.cornell-note .callout[data-callout="cue"] {
+    font-style:italic;
+    font-family: var(--font-text);
+    font-size: var(--font-adaptive-normal);
+    font-weight: var(--normal-weight);
+    line-height: var(--line-height);
+    margin-right: 10px;
+    position: absolute;
+    left: 15px;
+    max-width: var(--cue-width);
+    background:none;
+    border:none;
+}
+
+.markdown-preview-view.cornell-note .callout[data-callout="cue"] .callout-title {
+    padding: 0px 8px 0px 0px;
+    background:none;
+}
+
+
+.markdown-preview-view.cornell-note .callout[data-callout="cue"] .callout-title-inner {
+    font-weight: 700;
+}
+
+.markdown-preview-view.cornell-note .callout[data-callout="cue"] .callout-content {
+}
+
+.markdown-preview-view.cornell-note .callout[data-callout="cue"] .callout-icon {
+    display:none;
+}
+
+/* Summary callout setup */
+
+.markdown-preview-view.cornell-note .callout[data-callout="summary"] {
+    font-style:italic;
+    font-family: var(--font-text);
+    font-size: var(--font-adaptive-normal);
+    font-weight: var(--normal-weight);
+    line-height: var(--line-height);
+    margin-right: 10px;
+    position: absolute;
+    left: 15px;
+    max-width: var(--cue-width);
+    background:none;
+    border:none;
+    max-width: 100%;
+    background:var(--background-primary);
+    border:none;
+}
+
+.markdown-preview-view.cornell-note .callout[data-callout="summary"] .callout-title {
+    background:none;
+}
+
+
+.markdown-preview-view.cornell-note .callout[data-callout="summary"] .callout-title-inner {
+    font-weight: 700;
+}
+
+.markdown-preview-view.cornell-note .callout[data-callout="summary"] .callout-content {
+}
+
+.markdown-preview-view.cornell-note .callout[data-callout="summary"] .callout-icon {
+    display:none;
+}

@@ -1,0 +1,38 @@
+{
+  "database": "Zotero",
+  "noteImportFolder": "",
+  "pdfExportImageDPI": 120,
+  "pdfExportImageFormat": "png",
+  "pdfExportImageQuality": 90,
+  "citeFormats": [
+    {
+      "name": "Format #3",
+      "format": "formatted-citation"
+    },
+    {
+      "name": "Bluebook",
+      "format": "formatted-citation",
+      "cslStyle": "bluebook-law-review"
+    },
+    {
+      "name": "Pandoc",
+      "format": "pandoc",
+      "cslStyle": "apa",
+      "brackets": true
+    }
+  ],
+  "exportFormats": [
+    {
+      "name": "Create Literature Note",
+      "outputPathTemplate": "Literature Notes/@{{citekey}}.md",
+      "imageOutputPathTemplate": "Data/Attachments/{{citekey}}/",
+      "imageBaseNameTemplate": "image",
+      "templatePath": "Templates/Reference template v2.md",
+      "cslStyle": "apa"
+    }
+  ],
+  "citeSuggestTemplate": "[[{{citekey}}]]",
+  "openNoteAfterImport": false,
+  "whichNotesToOpenAfterImport": "first-imported-note",
+  "shouldConcat": true
+}

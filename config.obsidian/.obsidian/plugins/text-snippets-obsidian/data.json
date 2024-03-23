@@ -1,0 +1,17 @@
+{
+  "snippets_file": "snippets : It is an obsidian plugin, that replaces your selected text.\nmer : ```mermaid$nl$$end$$nl$```\nchem : ```smiles$nl$$end$$nl$```\nct : __{'textBelowArrow': '$end$'}__",
+  "snippets": [
+    "snippets : It is an obsidian plugin, that replaces your selected text.",
+    "mer : ```mermaid$nl$$end$$nl$```",
+    "chem : ```smiles$nl$$end$$nl$```",
+    "ct : __{'textBelowArrow': '$end$'}__"
+  ],
+  "endSymbol": "$end$",
+  "newlineSymbol": "$nl$",
+  "stopSymbol": "$tb$",
+  "pasteSymbol": "$pst$",
+  "useTab": false,
+  "useSpace": false,
+  "wordDelimiters": "$()[]{}<>,.!?;:'\"\\/",
+  "isWYSIWYG": true
+}

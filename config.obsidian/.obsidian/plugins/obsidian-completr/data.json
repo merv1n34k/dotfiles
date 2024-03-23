@@ -1,0 +1,22 @@
+{
+  "characterRegex": "a-zA-ZöäüÖÄÜßа-яА-я",
+  "maxLookBackDistance": 50,
+  "autoFocus": true,
+  "autoTrigger": true,
+  "minWordLength": 2,
+  "minWordTriggerLength": 3,
+  "wordInsertionMode": "Ignore-Case & Replace",
+  "ignoreDiacriticsWhenFiltering": true,
+  "latexProviderEnabled": true,
+  "latexTriggerInCodeBlocks": true,
+  "latexMinWordTriggerLength": 2,
+  "latexIgnoreCase": true,
+  "fileScannerProviderEnabled": true,
+  "fileScannerScanCurrent": true,
+  "wordListProviderEnabled": true,
+  "frontMatterProviderEnabled": true,
+  "frontMatterTagAppendSuffix": true,
+  "frontMatterIgnoreCase": true,
+  "calloutProviderEnabled": true,
+  "calloutProviderSource": "Completr"
+}

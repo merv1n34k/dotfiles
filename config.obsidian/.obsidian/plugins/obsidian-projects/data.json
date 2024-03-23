@@ -1,0 +1,167 @@
+{
+  "version": 2,
+  "projects": [
+    {
+      "fieldConfig": {},
+      "defaultName": "",
+      "templates": [
+        "Templates/template.md"
+      ],
+      "excludedNotes": [],
+      "isDefault": false,
+      "dataSource": {
+        "kind": "folder",
+        "config": {
+          "path": "Drafts",
+          "recursive": false
+        }
+      },
+      "newNotesFolder": "",
+      "views": [
+        {
+          "config": {},
+          "filter": {
+            "conditions": []
+          },
+          "colors": {
+            "conditions": []
+          },
+          "sort": {
+            "criteria": []
+          },
+          "id": "b01f54db-45e0-49ac-bbcc-74c6383ea3bd",
+          "name": "Table",
+          "type": "table"
+        }
+      ],
+      "id": "9b45db6e-070f-4fb2-8807-3f5458bd848b",
+      "name": "Drafts"
+    },
+    {
+      "fieldConfig": {},
+      "defaultName": "",
+      "templates": [
+        "Templates/template_lectures.md"
+      ],
+      "excludedNotes": [],
+      "isDefault": false,
+      "dataSource": {
+        "kind": "folder",
+        "config": {
+          "path": "NTUUKPI",
+          "recursive": false
+        }
+      },
+      "newNotesFolder": "",
+      "views": [
+        {
+          "config": {},
+          "filter": {
+            "conditions": []
+          },
+          "colors": {
+            "conditions": []
+          },
+          "sort": {
+            "criteria": []
+          },
+          "id": "8a8b746f-cc32-4370-a6b9-8bd69d3c3a99",
+          "name": "Table",
+          "type": "table"
+        }
+      ],
+      "id": "8427921f-25e3-47ff-9d0f-e21552c7aced",
+      "name": "UniLectures"
+    },
+    {
+      "fieldConfig": {},
+      "defaultName": "",
+      "templates": [],
+      "excludedNotes": [],
+      "isDefault": false,
+      "dataSource": {
+        "kind": "folder",
+        "config": {
+          "path": "Templates",
+          "recursive": false
+        }
+      },
+      "newNotesFolder": "",
+      "views": [
+        {
+          "config": {
+            "orderFields": [
+              "name",
+              "path",
+              "due",
+              "last",
+              "status",
+              "published",
+              "tags",
+              "weight"
+            ]
+          },
+          "filter": {
+            "conditions": []
+          },
+          "colors": {
+            "conditions": []
+          },
+          "sort": {
+            "criteria": []
+          },
+          "id": "d2a97b08-23ec-4322-b4fb-a96fc611da95",
+          "name": "Table",
+          "type": "table"
+        }
+      ],
+      "id": "b68c118e-7036-41a2-8d5d-7a87aa4d285f",
+      "name": "Templates"
+    },
+    {
+      "fieldConfig": {},
+      "defaultName": "",
+      "templates": [
+        "Templates/template.md"
+      ],
+      "excludedNotes": [],
+      "isDefault": false,
+      "dataSource": {
+        "kind": "folder",
+        "config": {
+          "path": "Thesis Alcohol Biofuels",
+          "recursive": false
+        }
+      },
+      "newNotesFolder": "",
+      "views": [
+        {
+          "config": {},
+          "filter": {
+            "conditions": []
+          },
+          "colors": {
+            "conditions": []
+          },
+          "sort": {
+            "criteria": []
+          },
+          "id": "6912833f-6aec-43f6-a628-2b65225d0bea",
+          "name": "Table",
+          "type": "table"
+        }
+      ],
+      "id": "8157c050-4afd-4f7b-bcdf-015c78cc615c",
+      "name": "Thesis Alcohol Biofuels"
+    }
+  ],
+  "archives": [],
+  "preferences": {
+    "projectSizeLimit": 1000,
+    "frontmatter": {
+      "quoteStrings": "PLAIN"
+    },
+    "commands": [],
+    "linkBehavior": "open-note"
+  }
+}

@@ -1,0 +1,39 @@
+/* Set the maximum height for images in both Preview and Editor modes */
+.markdown-preview-view img,
+.markdown-rendered img {
+    max-height: 200px;
+    /* Adjust this value to your preferred maximum height */
+    width: 100%;
+    /* Make images full width */
+    display: block;
+    /* Center the images horizontally */
+    object-fit: cover;
+    object-position: 50% 5%;
+    border-radius:var(--button-radius);
+}
+
+/* Make sure that images in community pages are left untouched */
+.community-modal-readme img {
+    width:inherit;
+    margin:inherit;
+    max-height:inherit;
+    display: inherit;
+    object-fit: inherit;
+    object-position: inherit;
+    border:inherit;
+}
+
+.image-captions-figure {
+    background:none !important;
+    border-radius:var(--button-radius);
+    width:100% !important;
+}
+
+.image-captions-caption {
+    margin-top:10px;
+    border-radius:var(--button-radius);
+    border: var(--border-width) solid var(--text-accent) !important;
+    background:var(--background-secondary) !important;
+    font-size:var(--footnote-size) !important;
+}
+

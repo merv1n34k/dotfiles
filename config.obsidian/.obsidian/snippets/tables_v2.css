@@ -1,0 +1,71 @@
+/* Style tables to resemble LaTeX booktabs tables */
+
+.markdown-preview-view table {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0!important;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-color:none !important;
+}
+
+/* Remove all inner borders */
+.markdown-preview-view table th,
+.markdown-preview-view table td {
+  font-size: var(--font-small) !important;
+  padding: 10px !important;
+  border: none !important;
+  text-align: center !important;
+}
+
+/* Add top and bottom borders to the table */
+.markdown-preview-view table {
+    border-collapse: collapse !important;
+}
+
+/* Add hover effect using Obsidian variables */
+.markdown-preview-view thead {
+  background-color: var(--background-secondary)
+}
+
+
+/* Add background color for odd and even rows using Obsidian variables */
+.markdown-preview-view tbody  tr:nth-child(odd) {
+  background-color: var(--interactive-normal);
+}
+
+.markdown-preview-view tbody tr:nth-child(even) {
+  background-color: var(--interactive-hover);
+}
+
+/* Add hover effect using Obsidian variables */
+.markdown-rendered tbody tr:nth-child(even):hover,
+.markdown-rendered tbody tr:nth-child(odd):hover {
+  background-color: var(--background-primary);
+}
+
+/* Add the radius */
+th:first-child {border-top-left-radius: var(--button-radius)}
+th:last-child {border-top-right-radius: var(--button-radius)}
+tr:last-child td:first-child {border-bottom-left-radius: var(--button-radius)}
+tr:last-child td:last-child {border-bottom-right-radius: var(--button-radius)}
+
+/* Add hover effect using Obsidian variables */
+.markdown-rendered thead:hover{
+  background-color:inherit;
+}
+
+/* Add top line to the table header */
+/*.markdown-preview-view table thead {
+  border-top: 4px solid var(--text-accent) !important;
+}*/
+
+/* Add bottom line to the table body */
+/*.markdown-preview-view table tbody {
+  border-bottom: 4px solid var(--text-accent) !important;
+}*/
+
+/* Add a midline to separate the header from the body */
+.markdown-preview-view table thead tr {
+  border-bottom: 2px solid var(--text-accent) !important;
+}
