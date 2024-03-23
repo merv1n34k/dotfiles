@@ -8,11 +8,11 @@ PS: DO NOT use these configurations *as is* on your machine. Many things can be 
 
 # ROADMAP
 
- -[ ] Update READMEs, provide documentation
- -[X] Add second vesrion of nvim config improvements
- -[X] Add configuration files for Obsidian and zshrc
- -[ ] Obsidian configuration documentation and optimization
- -[ ] Nvim-v2 optimization
+ - [ ] Update READMEs, provide documentation
+ - [X] Add second vesrion of nvim config improvements
+ - [X] Add configuration files for Obsidian and zshrc
+ - [ ] Obsidian configuration documentation and optimization
+ - [ ] Nvim-v2 optimization
 
 # License
 

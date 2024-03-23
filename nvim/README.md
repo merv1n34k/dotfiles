@@ -9,14 +9,14 @@ This is my first nvim configuration, mostly based on [NvCham]() and [Nvim-config
 
 ## Roadmap:
 
- -[X] Add LuaSnip
- -[X] Add CMP and LSP
- -[ ] Clean up plugins.lua
- -[ ] Add custom snippets for tex
- -[ ] Configure telescope and its extensions
- -[ ] Configure markdown
- -[ ] Configure which-key and wilder
- -[ ] Update README
+ - [X] Add LuaSnip
+ - [X] Add CMP and LSP
+ - [ ] Clean up plugins.lua
+ - [ ] Add custom snippets for tex
+ - [ ] Configure telescope and its extensions
+ - [ ] Configure markdown
+ - [ ] Configure which-key and wilder
+ - [ ] Update README
 
 ## License
 

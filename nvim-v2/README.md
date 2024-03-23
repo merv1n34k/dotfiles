@@ -7,7 +7,7 @@ This configuration is mostly consists of amazing [quarto-nvim-kickstarter]() con
  - ...
 
 ## Roadmap
- -[ ] Update README
+ - [ ] Update README
 
 ## License
 

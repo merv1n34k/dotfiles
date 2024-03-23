@@ -6,7 +6,7 @@ This configuation is in the process of cleanup and major improvements *(as usual
  - ...
 
 ## Roadmap
- -[ ] Update README
+ - [ ] Update README
 
 ## License
 
