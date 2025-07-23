@@ -1,13 +1,17 @@
-# Neovim ricing
-This configuration is mostly consists of amazing [quarto-nvim-kickstarter]() configuration, definitely check it out!
+# Neovim Config 3.0
+This configuration is my latest configuration, started off from the amazing [quarto-nvim-kickstarter](https://github.com/jmbuhr/nvim-config.git) configuration, definitely check it out!
 
 ## Important notes
- - Package manager: lazy.nvim
- - Support native LSP and CMP with snippets
- - ...
+ - Package manager: rocks.nvim
+ - Native LSP support
+ - Snippets, completions, folding, treestitter, statusline, bufferline, git
+   support and many more!
 
 ## Roadmap
- - [ ] Update README
+ - [ ] Create proper README
+ - [ ] Configure smart spell LSP
+ - [ ] Reduce startup time, minimize the number of plugins
+ - [ ] Improve themes and make unified appearance
 
 ## License
 
