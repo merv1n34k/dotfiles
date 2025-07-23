@@ -1,0 +1,182 @@
+# This is your rocks.nvim plugins declaration file.
+# Here is a small yet pretty detailed example on how to use it:
+#
+# [plugins]
+# nvim-treesitter = "semver_version"  # e.g. "1.0.0"
+
+# List of non-Neovim rocks.
+# This includes things like `toml` or other lua packages.
+[rocks]
+
+# List of Neovim plugins to install alongside their versions.
+# If the plugin name contains a dot then you must add quotes to the key name!
+[plugins]
+"rocks.nvim" = "2.43.0"
+"bufferline.nvim" = "4.9.1"
+"lualine.nvim" = "scm"
+"rocks-git.nvim" = "2.5.2"
+"indent-blankline.nvim" = "3.8.7"
+"headlines.nvim" = "5.0.0"
+neogit = "2.0.0"
+"diffview.nvim" = "scm"
+alpha-nvim = "scm"
+"tokyonight.nvim" = "4.11.0"
+"onedarkpro.nvim" = "2.8.0"
+"nightfox.nvim" = "3.10.0"
+"monokai.nvim" = "scm"
+"material.nvim" = "scm"
+nvim-autopairs = "scm"
+"mason.nvim" = "scm"
+"telescope.nvim" = "scm"
+luasnip = "2.3.0"
+"plenary.nvim" = "scm"
+"rocks-lazy.nvim" = "scm"
+"rocks-config.nvim" = "3.1.0"
+"rocks-treesitter.nvim" = "1.3.0"
+"telescope-file-browser.nvim" = "scm"
+"telescope-zf-native.nvim" = "1.0.0"
+"dressing.nvim" = "3.1.1"
+tree-sitter-latex = "0.0.35"
+tree-sitter-python = "0.0.46"
+tree-sitter-toml = "0.0.31"
+tree-sitter-bash = "0.0.43"
+tree-sitter-css = "0.0.38"
+tree-sitter-yaml = "0.0.36"
+"cellular-automaton.nvim" = "scm"
+"git-blame.nvim" = "scm"
+"neoscroll.nvim" = "scm"
+
+[plugins."focus.nvim" ]
+git = "cdmill/focus.nvim"
+rev = "0f51cb7ff2640737858249015b6af0ea6cb28904"
+
+[plugins."kanagawa.nvim" ]
+version = "scm"
+opt = true
+colorscheme = ["kanagawa"]
+event = "VimEnter"
+
+[plugins."global-note.nvim"]
+git = "backdround/global-note.nvim"
+rev = "1e0d4bba425d971ed3ce40d182c574a25507115c"
+
+[plugins."whitespace.nvim"]
+git = "jdhao/whitespace.nvim"
+rev = "fda1dd48e63e62a0ebd270c38d87e246b29c3616"
+
+[plugins.sonokai]
+git = "sainnhe/sonokai"
+rev = "v0.3.3"
+
+[plugins.gruvbox-material]
+git = "sainnhe/gruvbox-material"
+rev = "v1.2.5"
+
+[plugins."nord.nvim"]
+git = "shaunsingh/nord.nvim"
+rev = "80c1e5321505aeb22b7a9f23eb82f1e193c12470"
+
+[plugins.everforest]
+git = "sainnhe/everforest"
+rev = "v0.3.0"
+
+[plugins.neovim]
+git = "rose-pine/neovim"
+rev = "v3.0.2"
+
+[plugins.nvim]
+git = "catppuccin/nvim"
+rev = "v1.10.0"
+
+[plugins.edge]
+git = "sainnhe/edge"
+rev = "v0.2.3"
+
+[plugins.aurora]
+git = "ray-x/aurora"
+rev = "af3e80a8ca4f9a6e3bd40e2ba12073c1d0041a81"
+
+[plugins."nvim-colorizer.lua"]
+git = "norcalli/nvim-colorizer.lua"
+rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
+
+[plugins.vim-auto-save]
+git = "907th/vim-auto-save"
+rev = "2e3e54ea4c0fc946c21b0a4ee4c1c295ba736ee8"
+
+[plugins.vimtex]
+git = "lervag/vimtex"
+rev = "v2.16"
+
+[plugins."gitsigns.nvim"]
+git = "lewis6991/gitsigns.nvim"
+rev = "v1.0.2"
+
+[plugins."git-conflict.nvim"]
+git = "akinsho/git-conflict.nvim"
+rev = "v2.1.0"
+
+[plugins.friendly-snippets]
+git = "rafamadriz/friendly-snippets"
+rev = "00ebcaa159e817150bd83bfe2d51fa3b3377d5c4"
+
+[plugins."texpresso.vim"]
+git = "let-def/texpresso.vim"
+rev = "1cc949fde8ed3220968039b6b1b6ccdd9f475087"
+
+[plugins."blink.cmp"]
+git = "saghen/blink.cmp"
+rev = "v1.3.1"
+
+[plugins."nvim-lspconfig"]
+git = "neovim/nvim-lspconfig"
+rev = "v2.3.0"
+config = false
+
+[plugins.blink-cmp-words]
+git = "archie-judd/blink-cmp-words"
+rev = "v0.2.0"
+
+[plugins."wf.nvim"]
+git = "cassin01/wf.nvim"
+rev = "v1.0.3"
+
+[bundles.cmp]
+items = [
+    "blink.cmp",
+    "luasnip"
+]
+
+[config]
+plugins_dir = "plugins/"
+auto_setup = false # DO NOT NEVER EVER SET THIS TO TRUE
+
+[treesitter]
+# auto_highlight = "all"
+# NOTE: These are parsers, not filetypes.
+auto_highlight = [
+  "r",
+  "python",
+  "markdown",
+  "julia",
+  "bash",
+  "yaml",
+  "lua",
+  "vim",
+  "query",
+  "vimdoc",
+  "latex",
+  "html",
+  "css",
+  "toml"
+]
+auto_install = "prompt" # | true | false
+
+[treesitter.parser_map]
+# You can add custom filetype to parser mappings.
+# Determine the filetype with ':lua =vim.bo[0].filetype'.
+# NOTE: You don't actually have to add these examples.
+# They are added by default.
+PKGBUILD = "bash"
+cls = "latex"
+sty = "latex"
