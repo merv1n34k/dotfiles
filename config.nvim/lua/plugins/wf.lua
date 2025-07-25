@@ -60,5 +60,5 @@ vim.keymap.set(
     -- mark(opts?: table) -> function
     -- opts?: option
     which_key({ text_insert_in_advance = "<Leader>" }),
-    { noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
+    { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
 )

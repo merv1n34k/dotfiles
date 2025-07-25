@@ -16,7 +16,6 @@
 "lualine.nvim" = "scm"
 "rocks-git.nvim" = "2.5.2"
 "indent-blankline.nvim" = "3.8.7"
-"headlines.nvim" = "5.0.0"
 neogit = "2.0.0"
 "diffview.nvim" = "scm"
 alpha-nvim = "scm"
@@ -45,6 +44,10 @@ tree-sitter-yaml = "0.0.36"
 "cellular-automaton.nvim" = "scm"
 "git-blame.nvim" = "scm"
 "neoscroll.nvim" = "scm"
+
+[plugins."render-markdown.nvim" ]
+git = "meanderingprogrammer/render-markdown.nvim"
+rev = "v8.6.0"
 
 [plugins."focus.nvim" ]
 git = "cdmill/focus.nvim"
