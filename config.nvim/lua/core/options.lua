@@ -20,6 +20,7 @@ opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.undofile = true
 opt.conceallevel = 2
 opt.textwidth = 80
+opt.colorcolumn = "81"
 
 
 -- Indenting and folding
@@ -30,8 +31,8 @@ opt.shiftwidth = tabwidth
 opt.smartindent = true
 opt.tabstop = tabwidth
 opt.softtabstop = tabwidth
-opt.foldclose = "all"
-opt.foldopen = "all"
+opt.foldclose = ""
+opt.foldopen = ""
 opt.foldmethod = "expr"
 opt.foldlevel = 4
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -100,7 +101,7 @@ vim.filetype.add {
 vim.cmd.packadd 'cfilter'
 
 -- Setup status line
-vim.cmd([[
+--[=[vim.cmd([[
 let g:currentmode={
        \ 'n'  : '%#String# NORMAL ',
        \ 'v'  : '%#Search# VISUAL ',
@@ -113,4 +114,4 @@ let g:currentmode={
        \ 't'  : '%#ModeMsg# TERM ',
        \}
 ]])
-vim.opt.statusline = "%{%g:currentmode[mode()]%} %* %t | %y | %* %= c:%c l:%l/%L %p%%"
+vim.opt.statusline = "%{%g:currentmode[mode()]%} %* %t | %y | %* %= c:%c l:%l/%L %p%%" --]=]

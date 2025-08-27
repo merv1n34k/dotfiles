@@ -7,9 +7,20 @@ require('blink.cmp').setup({
     cmdline = {
         keymap = {
             ['Tab'] = { 'select_and_accept', 'fallback' },
+            ['<CR>'] = { 'select_accept_and_enter', 'fallback' },
         },
         enabled = true,
-        completion = { menu = { auto_show = true } },
+        completion = {
+            menu = {
+                auto_show = function(ctx)
+                    local cmdtype = vim.fn.getcmdtype()
+                    if cmdtype == '/' or cmdtype == '?' then
+                        return false
+                    end
+                    return true
+                end,
+            }
+        },
     },
 
     term = { enabled = true, keymap = { preset = 'none' } },
@@ -17,8 +28,12 @@ require('blink.cmp').setup({
     completion = {
         keyword = { range = 'full' },
         accept = { auto_brackets = { enabled = false } },
-        list = { selection = { preselect = true, auto_insert = false } },
-
+        list = {
+            selection = {
+                preselect = true,
+                auto_insert = true
+            }
+        },
         menu = {
             auto_show = false,
             draw = {
@@ -30,7 +45,6 @@ require('blink.cmp').setup({
             border = "rounded",
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
         },
-
         documentation = {
             auto_show = true,
             window = {

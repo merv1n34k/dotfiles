@@ -5,6 +5,7 @@ vim.lsp.enable({
     "gopls",
     "ltex",
     "r_language_server",
+    "clangd",
     "cssls",
     "html",
     "cmake",
@@ -14,17 +15,15 @@ vim.lsp.enable({
 })
 
 vim.diagnostic.config({
-    virtual_lines = {
-        current_line = true
-    },
-    virtual_text = false,
+    virtual_text = { current_line = true, severity = { min = "HINT", max = "WARN" } },
+    virtual_lines = { current_line = true, severity = { min = "ERROR" } },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
     float = {
         focusable = false,
         style = "minimal",
-        border = _border,
+        border = "rounded",
         source = "always",
         header = "",
         prefix = "",

@@ -144,6 +144,18 @@ rev = "v0.2.0"
 git = "cassin01/wf.nvim"
 rev = "v1.0.3"
 
+[plugins."overlength.nvim"]
+git = "lcheylus/overlength.nvim"
+rev = "665760c533db0c9c491e112d4c271acebe67e501"
+
+[plugins."techbase.nvim"]
+git = "mcauley-penney/techbase.nvim"
+rev = "e509f0a9b84e2ee2c32133827219f022150226fa"
+
+[plugins."mini.icons"]
+git = "echasnovski/mini.icons"
+rev = "v0.16.0"
+
 [bundles.cmp]
 items = [
     "blink.cmp",

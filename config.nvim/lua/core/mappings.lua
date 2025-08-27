@@ -1,8 +1,3 @@
--- TODO:
--- * instead of comments add mapping descriptions
--- clean mappings
--- add new handy mappings
-
 local anymap = function(mode, key, effect, expr, desc)
     expr = expr or false
     desc = desc or nil
@@ -184,6 +179,8 @@ nmap("<leader>Q", "<cmd>qa!<cr>", false, "[common] quit all buffers without savi
 nmap("<leader>yy", "<cmd>%yank<cr>", false, "[common] copy whole buffer")
 -- see https://stackoverflow.com/a/4317090/6064933.
 nmap("<leader>r", "printf('`[%s`]', getregtype()[0])", true, "[common] reselect the pasted text")
+nmap("<leader>R", "<Esc>gg0vG$p", false, "[common] replace whole buffer with text in the clipboard")
+nmap("<leader>s", "<cmd>ls!<cr>", false, "[common] list all buffers")
 
 -- automatic folding
 nmap("<leader>m", "")
@@ -192,13 +189,11 @@ nmap("<leader>md", "<cmd>set foldclose& foldopen&<cr>", false, "[fold] disable a
 
 -- lsp
 nmap("<leader>lr", "<cmd>Telescope lsp_references<cr>", false, "[lsp] reference")
-nmap("<leader>lD", "vim.lsp.buf.type_definition", false, "[lsp] type definition")
-nmap("<leader>la", "vim.lsp.buf.code_action", false, "[lsp] code action")
-nmap("<leader>le", "vim.diagnostic.open_float", false, "[lsp] diagnostics")
-nmap("<leader>ldd", "vim.diagnostic.disable", false, "[lsp.diagnostics] disable")
-nmap("<leader>lde", "vim.diagnostic.enable", false, "[lsp.diagnostics] enable")
-nmap("<leader>ls", "<cmd>ls!<cr>", false, "[lsp] list all buffers")
-nmap("<leader>lk", "vim.lsp.buf.hover", false, "[lsp] jump to definition")
+nmap("<leader>lD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", false, "[lsp] type definition")
+nmap("<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", false, "[lsp] code action")
+nmap("<leader>ldd", "<cmd>lua vim.diagnostic.enable(false)<cr>", false, "[lsp.diagnostics] disable")
+nmap("<leader>lde", "<cmd>lua vim.diagnostic.enable(true)<cr>", false, "[lsp.diagnostics] enable")
+nmap("<leader>lk", "<cmd>lua vim.lsp.buf.hover()<cr>", false, "[lsp] jump to definition")
 
 -- vim
 nmap("<leader>vc", "<cmd>Telescope colorscheme<cr>", false, "[vim] colortheme")
@@ -273,12 +268,12 @@ nmap("<leader>nv", "<cmd>VimNote<cr>", false, "[plugin.global-note] open vim not
 
 ---------------------------------------- git-conflict.nvim --------------------------------
 
-nmap("<leader>gco", ":GitConflictChooseOurs<cr>", false, "[git.conflict] choose ours")
-nmap("<leader>gct", ":GitConflictChooseTheirs<cr>", false, "[git.conflict] choose theirs")
-nmap("<leader>gcb", ":GitConflictChooseBoth<cr>", false, "[git.conflict] choose both")
-nmap("<leader>gc0", ":GitConflictChooseNone<cr>", false, "[git.conflict] choose none")
-nmap("]x", ":GitConflictNextConflict<cr>")
-nmap("[x", ":GitConflictPrevConflict<cr>")
+nmap("<leader>gco", "<cmd>GitConflictChooseOurs<cr>", false, "[git.conflict] choose ours")
+nmap("<leader>gct", "<cmd>GitConflictChooseTheirs<cr>", false, "[git.conflict] choose theirs")
+nmap("<leader>gcb", "<cmd>GitConflictChooseBoth<cr>", false, "[git.conflict] choose both")
+nmap("<leader>gc0", "<cmd>GitConflictChooseNone<cr>", false, "[git.conflict] choose none")
+nmap("]x", "<cmd>GitConflictNextConflict<cr>")
+nmap("[x", "<cmd>GitConflictPrevConflict<cr>")
 
 ---------------------------------------- focus.nvim ---------------------------------------
 

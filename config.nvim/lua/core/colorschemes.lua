@@ -15,13 +15,14 @@ M.colorscheme2dir = {
     --sonokai = "sonokai",
     --gruvbox = "gruvbox",
     gruvbox_material = "gruvbox-material",
-    nord = "nord.nvim",
+    --nord = "nord.nvim",
     everforest = "everforest",
     nightfox = "nightfox.nvim",
     --kanagawa = "kanagawa.nvim",
     catppuccin = "catppuccin",
     rose_pine = "rose-pine",
     onedarkpro = "onedarkpro.nvim",
+    techbase = "techbase",
     --monokai = "monokai.nvim",
     --material = "material.nvim",
     --neon = "neon",
@@ -161,9 +162,22 @@ M.material = function()
     cmd('colorscheme material')
 end
 
+M.techbase = function()
+    require('techbase').setup({
+        transparent = true,
+
+        plugin_support = {
+            visual_whitespace = false,
+        },
+
+        hl_overrides = {},
+    })
+    vim.cmd.colorscheme("techbase")
+end
+
 --- Use a random colorscheme from the pre-defined list of colorschemes or put your desired colorscheme.
 M.use_colorscheme = function()
-    local colorscheme = utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
+    local colorscheme = "techbase" -- utils.rand_element(vim.tbl_keys(M.colorscheme2dir))
 
     if not vim.tbl_contains(vim.tbl_keys(M), colorscheme) then
         local msg = "Invalid colorscheme: " .. colorscheme
