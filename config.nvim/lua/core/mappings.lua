@@ -88,6 +88,9 @@ anymap({ "n", "x" }, "L", "g_")
 -- Save key strokes (now we do not need to press shift to enter command mode).
 anymap({ "n", "x" }, ";", ":")
 
+nmap("W", "<cmd>w<cr>")
+nmap("Q", "<cmd>x<cr>")
+
 -------------------------------------- insert mode --------------------------------------
 
 -- Turn the word under cursor to upper case
@@ -167,14 +170,14 @@ nmap("<leader><Up>", "<C-W>k", false, "[window] switch top")
 nmap("<leader><Down>", "<C-W>j", false, "[window] switch down")
 
 -- common (do not use c, f, l, v, g, n, t and m)
-nmap("<leader>w", "<cmd>w<cr>", false, "[common] write buffer")
+--nmap("<leader>w", "<cmd>w<cr>", false, "[common] write buffer")
 nmap("<leader>x", "<cmd>w<cr>:source %<cr>", false, "[common] execute file")
 -- see https://stackoverflow.com/a/16136133/6064933
 nmap("<leader>o", "printf('m`%so<ESC>``', v:count1)", true, "[common] insert blank below current line")
 nmap("<leader>O", "printf('m`%sO<ESC>``', v:count1)", true, "[common] insert blank below current line")
 nmap("<leader>p", "m`o<ESC>p``", false, "[common] paste below current line")
 nmap("<leader>P", "m`O<ESC>p``", false, "[common] paste above current line")
-nmap("<leader>q", "<cmd>x<cr>", false, "[common] save and quit file(s)")
+--nmap("<leader>q", "<cmd>x<cr>", false, "[common] save and quit file(s)")
 nmap("<leader>Q", "<cmd>qa!<cr>", false, "[common] quit all buffers without saving")
 nmap("<leader>yy", "<cmd>%yank<cr>", false, "[common] copy whole buffer")
 -- see https://stackoverflow.com/a/4317090/6064933.
@@ -259,6 +262,10 @@ nmap('<down>', '<cmd>BufferLineMoveNext<cr>', false, "[bufferline] move tab righ
 ---------------------------------------- whitespace.nvim ----------------------------------
 
 nmap("<space><space>", "<cmd>StripTrailingWhitespace<cr>", false, "[whitespace] strip trailing whitespaces")
+
+---------------------------------------- visual-whitespace.nvim
+
+anymap({ 'n', 'v' }, "<leader>k", require("visual-whitespace").toggle, false, '[plugin.visual-whitespace] toggle')
 
 ---------------------------------------- global-note.nvim ---------------------------------
 

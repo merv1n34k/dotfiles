@@ -1,5 +1,5 @@
 require("wf").setup({
-    theme = "default",
+    theme = "chad",
     -- you can copy the full list from lua/wf/setup/init.lua
 })
 
@@ -12,7 +12,7 @@ local mark = require("wf.builtin.mark")
 -- Register
 vim.keymap.set(
     "n",
-    "<Space>wr",
+    "<leader>wr",
     -- register(opts?: table) -> function
     -- opts?: option
     register(),
@@ -22,7 +22,7 @@ vim.keymap.set(
 -- Bookmark
 vim.keymap.set(
     "n",
-    "<Space>wbo",
+    "<leader>wbo",
     -- bookmark(bookmark_dirs: table, opts?: table) -> function
     -- bookmark_dirs: directory or file paths
     -- opts?: option
@@ -36,7 +36,7 @@ vim.keymap.set(
 -- Buffer
 vim.keymap.set(
     "n",
-    "<Space>wbu",
+    "<leader>wbu",
     -- buffer(opts?: table) -> function
     -- opts?: option
     buffer(),

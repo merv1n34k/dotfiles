@@ -75,6 +75,18 @@ local function esc_str(str)
     return str:gsub("([%(%)%%%+%-%*%?%[%]%^%$])", "%%%1")
 end
 
+local function check_width(parts, part, win_w)
+    local width = concat(parts):gsub("%%#.-#(.-)%%[*#]", "%1")
+    local part = parts[part]:gsub("%%#.-#(.-)%%[*#]", "%1")
+    local need = #width - #part
+
+    if need < win_w then
+        return true
+    end
+
+    return false
+end
+
 -- mode info
 local function mode_widget()
     local mode = vim.api.nvim_get_mode()["mode"]
@@ -84,7 +96,7 @@ local function mode_widget()
     elseif mode == "v" then
         mode = tools.hl_str("Search", "VISUAL")
     elseif mode == "V" then
-        mode = tools.hl_str("Search", "V*LINE")
+        mode = tools.hl_str("Search", "V" .. icons.bullet .. "LINE")
     elseif mode == "R" then
         mode = tools.hl_str("Substitute", "REPLACE")
     elseif mode == "i" then
@@ -101,17 +113,18 @@ local function mode_widget()
 end
 
 -- git info -----------------------------------------
-local function git_widget(root)
-    local remote = tools.get_git_remote_name(root)
-    local branch = tools.hl_str("Substitute", "@ " .. tools.get_git_branch(root))
+local function git_widget(root, width)
+    local remote = tools.get_git_remote_name(root) or ""
+    local branch = tools.get_git_branch(root) or ""
 
     local repo_info = ""
 
-    local win_w = api.nvim_win_get_width(0)
-    local need = #remote + #branch
-    if win_w < need + 80 then remote = "" end
+    if branch then
+        branch = tools.hl_str("Substitute", "@ " .. branch)
 
-    if remote and branch then
+        local need = #remote + #branch
+        if width < need + 60 then remote = "" end
+
         repo_info = string.format("%s %s %s ", ICON.branch, remote, branch)
     end
 
@@ -119,24 +132,26 @@ local function git_widget(root)
 end
 
 -- path info -----------------------------------------
-local function path_widget(root, fname)
+local function path_widget(root, fname, width)
     local file_name = fn.fnamemodify(fname, ":t")
     if fname == "" then file_name = "[No Name]" end
 
     local path = file_name
 
-    if bo.buftype == "help" then return ICON.file .. path end
+    if bo.buftype == "help" then return path end
 
     local dir_path = fn.fnamemodify(fname, ":h") .. "/"
+
     if dir_path == "./" then dir_path = "" end
 
-    dir_path = dir_path:gsub("^" .. esc_str(root) .. "/", "")
+    if root and dir_path then
+        dir_path = dir_path:gsub("^" .. esc_str(root) .. "/", "")
+    end
 
-    local win_w = api.nvim_win_get_width(0)
     local need = #dir_path + #path
-    if win_w < need + 80 then dir_path = "" end
+    if width < need + 80 then dir_path = "" end
 
-    return dir_path .. path .. " "
+    return dir_path .. path
 end
 
 -- diagnostics ---------------------------------------------
@@ -309,11 +324,14 @@ function M.render()
         fname = vim.bo[buf].filetype
     end
 
+    local win_w = api.nvim_win_get_width(winid)
+
+    -- Build essential parts first
     local parts = {
         pad = PAD,
         mode = mode_widget(),
-        git = git_widget(root),
-        path = path_widget(root, fname),
+        path = path_widget(root, fname, win_w),
+        git = git_widget(root, win_w),
         venv = venv_widget(),
         mod = get_opt("modifiable", { buf = buf })
             and (get_opt("modified", { buf = buf }) and ICON.modified or " ")
@@ -325,6 +343,13 @@ function M.render()
         fileinfo = fileinfo_widget(fname),
         scrollbar = scrollbar_widget(),
     }
+
+    -- remove non essential widgets if width is too narrow
+    for _, part in pairs({ "path", "git", "venv", "diff", "diag" }) do
+        if check_width(parts, part, win_w) ~= true then
+            parts[part] = ""
+        end
+    end
 
     return concat(parts)
 end

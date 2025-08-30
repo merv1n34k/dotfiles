@@ -156,6 +156,10 @@ rev = "e509f0a9b84e2ee2c32133827219f022150226fa"
 git = "echasnovski/mini.icons"
 rev = "v0.16.0"
 
+[plugins."visual-whitespace.nvim"]
+git = "mcauley-penney/visual-whitespace.nvim"
+rev = "77bd21fb442cf2b97d7224f8269c053e9def9cb9"
+
 [bundles.cmp]
 items = [
     "blink.cmp",
