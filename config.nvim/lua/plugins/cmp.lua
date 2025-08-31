@@ -7,7 +7,6 @@ require('blink.cmp').setup({
     cmdline = {
         keymap = {
             ['Tab'] = { 'select_and_accept', 'fallback' },
-            ['<CR>'] = { 'select_accept_and_enter', 'fallback' },
         },
         enabled = true,
         completion = {

@@ -7,7 +7,8 @@ local M = {}
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local get_opt = api.nvim_get_option_value
 
-local icons = tools.ui.icons
+local utils = require("core.utils")
+local icons = utils.data.ui.icons
 local mini_icons = require("mini.icons")
 
 local HL = {
@@ -24,7 +25,7 @@ local HL = {
 
 local ICON = {}
 for k, v in pairs(HL) do
-    ICON[k] = tools.hl_str(v[1], v[2])
+    ICON[k] = utils.hl_str(v[1], v[2])
 end
 
 local IGNORE = {
@@ -77,10 +78,11 @@ end
 
 local function check_width(parts, part, win_w)
     local width = concat(parts):gsub("%%#.-#(.-)%%[*#]", "%1")
-    local part = parts[part]:gsub("%%#.-#(.-)%%[*#]", "%1")
+    local part = parts[part]
+    if part then part = part:gsub("%%#.-#(.-)%%[*#]", "%1") else part = "" end
     local need = #width - #part
 
-    if need < win_w then
+    if win_w and need < win_w then
         return true
     end
 
@@ -92,21 +94,21 @@ local function mode_widget()
     local mode = vim.api.nvim_get_mode()["mode"]
 
     if mode == "n" then
-        mode = tools.hl_str("String", "NORMAL")
+        mode = utils.hl_str("String", "NORMAL")
     elseif mode == "v" then
-        mode = tools.hl_str("Search", "VISUAL")
+        mode = utils.hl_str("Search", "VISUAL")
     elseif mode == "V" then
-        mode = tools.hl_str("Search", "V" .. icons.bullet .. "LINE")
+        mode = utils.hl_str("Search", "V" .. icons.bullet .. "LINE")
     elseif mode == "R" then
-        mode = tools.hl_str("Substitute", "REPLACE")
+        mode = utils.hl_str("Substitute", "REPLACE")
     elseif mode == "i" then
-        mode = tools.hl_str("ModeMsg", "INSERT")
+        mode = utils.hl_str("ModeMsg", "INSERT")
     elseif mode == "c" then
-        mode = tools.hl_str("CurSearch", "COMMAND")
+        mode = utils.hl_str("CurSearch", "COMMAND")
     elseif mode == "t" then
-        mode = tools.hl_str("ModeMsg", "TERM")
+        mode = utils.hl_str("ModeMsg", "TERM")
     else
-        mode = tools.hl_str("String", "MODE")
+        mode = utils.hl_str("String", "MODE")
     end
 
     return mode
@@ -114,13 +116,13 @@ end
 
 -- git info -----------------------------------------
 local function git_widget(root, width)
-    local remote = tools.get_git_remote_name(root) or ""
-    local branch = tools.get_git_branch(root) or ""
+    local remote = utils.get_git_remote_name(root) or ""
+    local branch = utils.get_git_branch(root) or ""
 
     local repo_info = ""
 
     if branch then
-        branch = tools.hl_str("Substitute", "@ " .. branch)
+        branch = utils.hl_str("Substitute", "@ " .. branch)
 
         local need = #remote + #branch
         if width < need + 60 then remote = "" end
@@ -156,7 +158,7 @@ end
 
 -- diagnostics ---------------------------------------------
 local function diagnostics_widget()
-    if not tools.diagnostics_available() then return "" end
+    if not utils.diagnostics_available() then return "" end
     local diag_count = vim.diagnostic.count()
     local err, warn =
         string.format("%-3d", diag_count[1] or 0),
@@ -165,9 +167,9 @@ local function diagnostics_widget()
     return string.format(
         "%s%s %s%s ",
         ICON.error,
-        tools.hl_str("DiagnosticError", err),
+        utils.hl_str("DiagnosticError", err),
         ICON.warn,
-        tools.hl_str("DiagnosticWarn", warn)
+        utils.hl_str("DiagnosticWarn", warn)
     )
 end
 
@@ -222,16 +224,16 @@ local function diff_widget(fname)
 
     return string.format(
         "%s %s %s ",
-        tools.hl_str("DiffAdd", "+" .. added),
-        tools.hl_str("DiffChange", "~" .. modified),
-        tools.hl_str("DiffDelete", "-" .. removed)
+        utils.hl_str("DiffAdd", "+" .. added),
+        utils.hl_str("DiffChange", "~" .. modified),
+        utils.hl_str("DiffDelete", "-" .. removed)
     )
 end
 
 -- file/selection info -------------------------------------
 local function fileinfo_widget(fname)
     local ft = get_opt("filetype", {})
-    local lines = tools.group_number(api.nvim_buf_line_count(0), ",")
+    local lines = utils.group_number(api.nvim_buf_line_count(0), ",")
 
     local file_name = fn.fnamemodify(fname, ":t")
 
@@ -240,9 +242,9 @@ local function fileinfo_widget(fname)
     local icon, hl
     icon, hl = mini_icons.get("file", file_name)
 
-    local str = tools.hl_str(hl, icon) .. " "
+    local str = utils.hl_str(hl, icon) .. " "
 
-    if not tools.nonprog_modes[ft] then
+    if not utils.data.nonprog_modes[ft] then
         return str .. string.format("%3s lines", lines)
     end
 
@@ -252,7 +254,7 @@ local function fileinfo_widget(fname)
             .. string.format(
                 "%3s lines  %3s words",
                 lines,
-                tools.group_number(wc.words, ",")
+                utils.group_number(wc.words, ",")
             )
     end
 
@@ -260,9 +262,9 @@ local function fileinfo_widget(fname)
     return str
         .. string.format(
             "%3s lines %3s words  %3s chars",
-            tools.group_number(vlines, ","),
-            tools.group_number(wc.visual_words, ","),
-            tools.group_number(wc.visual_chars, ",")
+            utils.group_number(vlines, ","),
+            utils.group_number(wc.visual_words, ","),
+            utils.group_number(wc.visual_chars, ",")
         )
 end
 
@@ -274,14 +276,14 @@ local function venv_widget()
     local str
     if env and env ~= "" then
         str = string.format("[.venv: %s]  ", fn.fnamemodify(env, ":t"))
-        return tools.hl_str("Comment", str)
+        return utils.hl_str("Comment", str)
     end
     env = vim.env.CONDA_DEFAULT_ENV
     if env and env ~= "" then
         str = string.format("[conda: %s]  ", env)
-        return tools.hl_str("Comment", str)
+        return utils.hl_str("Comment", str)
     end
-    return tools.hl_str("Comment", "[no venv]")
+    return utils.hl_str("Comment", "[no venv]")
 end
 
 -- scrollbar ---------------------------------------------
@@ -289,7 +291,7 @@ local function scrollbar_widget()
     local cur = api.nvim_win_get_cursor(0)[1]
     local total = api.nvim_buf_line_count(0)
     local idx = math.ceil(((cur - 1) / total) * 100)
-    return tools.hl_str("Substitute", tostring(idx) .. "%%")
+    return utils.hl_str("Substitute", tostring(idx) .. "%%")
 end
 
 -- render ---------------------------------------------
@@ -319,7 +321,7 @@ function M.render()
         return " "
     end
 
-    local root = (buftype == "" and tools.get_path_root(fname)) or nil
+    local root = (buftype == "" and utils.get_path_root(fname)) or nil
     if buftype ~= "" and buftype ~= "help" then
         fname = vim.bo[buf].filetype
     end

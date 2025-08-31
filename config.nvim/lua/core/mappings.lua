@@ -90,6 +90,12 @@ anymap({ "n", "x" }, ";", ":")
 
 nmap("W", "<cmd>w<cr>")
 nmap("Q", "<cmd>x<cr>")
+nmap("qq", "<cmd>bdelete<cr>")
+nmap("t", function()
+    local tabline = require("ui.tabline")
+    local count = vim.v.count1
+    tabline.goto_tab(count)
+end, false)
 
 -------------------------------------- insert mode --------------------------------------
 
@@ -254,10 +260,10 @@ nmap("<leader>ce", "<cmd>set conceallevel=2<cr>", false, "[conceal] enable")
 -- plugins mappings
 ---------------------------------------- Bufferline.nvim ----------------------------------
 
-nmap('<left>', '<cmd>BufferLineCyclePrev<cr>', false, "[bufferline] cycle tab left")
-nmap('<right>', '<cmd>BufferLineCycleNext<cr>', false, "[bufferline] cycle tab right")
-nmap('<up>', '<cmd>BufferLineMovePrev<cr>', false, "[bufferline] move tab left")
-nmap('<down>', '<cmd>BufferLineMoveNext<cr>', false, "[bufferline] move tab right")
+nmap('<left>', "<cmd>Tcycleprev<cr>", false, "[tabline] cycle tab left")
+nmap('<right>', "<cmd>Tcyclenext<cr>", false, "[tabline] cycle tab right")
+nmap('<up>', "<cmd>Tmoveprev<cr>", false, "[tabline] move tab left")
+nmap('<down>', "<cmd>Tmovenext<cr>", false, "[tabline] move tab right")
 
 ---------------------------------------- whitespace.nvim ----------------------------------
 
