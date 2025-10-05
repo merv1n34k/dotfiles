@@ -117,7 +117,7 @@ end
 -- git info -----------------------------------------
 local function git_widget(root, width)
     local remote = utils.get_git_remote_name(root) or ""
-    local branch = utils.get_git_branch(root) or ""
+    local branch = utils.get_git_branch(root) or nil
 
     local repo_info = ""
 

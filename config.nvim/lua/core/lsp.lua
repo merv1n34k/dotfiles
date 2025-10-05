@@ -1,9 +1,7 @@
-local _border = require('misc.style')
-
 vim.lsp.enable({
+    "pyright",
     "lua_ls",
     "gopls",
-    "ltex",
     "r_language_server",
     "clangd",
     "cssls",
@@ -11,7 +9,7 @@ vim.lsp.enable({
     "cmake",
     "yamlls",
     "bashls",
-    "pyright"
+    "ruff"
 })
 
 vim.diagnostic.config({

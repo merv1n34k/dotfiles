@@ -67,7 +67,7 @@ opt.scrolloff = 5
 
 -- Spell
 opt.spell = true
-opt.spelllang = { 'en_us' }
+opt.spelllang = { 'en', 'uk', 'med' }
 opt.syntax = 'enable'
 
 -- Misc
@@ -99,19 +99,3 @@ vim.filetype.add {
 -- additional builtin vim packages
 -- filter quickfix list with Cfilter
 vim.cmd.packadd 'cfilter'
-
--- Setup status line
---[=[vim.cmd([[
-let g:currentmode={
-       \ 'n'  : '%#String# NORMAL ',
-       \ 'v'  : '%#Search# VISUAL ',
-       \ "\<C-V>" : '%#Title# V·Block ',
-       \ 'V'  : '%#IncSearch# V·Line ',
-       \ 'Rv' : '%#String# V·Replace ',
-       \ 'i'  : '%#ModeMsg# INSERT ',
-       \ 'R'  : '%#Substitute# R ',
-       \ 'c'  : '%#CurSearch# Command ',
-       \ 't'  : '%#ModeMsg# TERM ',
-       \}
-]])
-vim.opt.statusline = "%{%g:currentmode[mode()]%} %* %t | %y | %* %= c:%c l:%l/%L %p%%" --]=]

@@ -88,7 +88,7 @@ anymap({ "n", "x" }, "L", "g_")
 -- Save key strokes (now we do not need to press shift to enter command mode).
 anymap({ "n", "x" }, ";", ":")
 
-nmap("W", "<cmd>w<cr>")
+nmap("W", "<cmd>StripTrailingWhitespace<cr><cmd>w<cr>")
 nmap("Q", "<cmd>x<cr>")
 nmap("qq", "<cmd>bdelete<cr>")
 nmap("t", function()

@@ -82,7 +82,6 @@ M.gruvbox_material = function()
     cmd([[colorscheme gruvbox-material]])
 end
 
-
 M.nord = function()
     cmd([[colorscheme nord]])
 end
@@ -164,13 +163,11 @@ end
 
 M.techbase = function()
     require('techbase').setup({
-        transparent = true,
+        transparent = false,
 
         plugin_support = {
             visual_whitespace = false,
-        },
-
-        hl_overrides = {},
+        }
     })
     vim.cmd.colorscheme("techbase")
 end

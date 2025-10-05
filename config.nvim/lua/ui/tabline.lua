@@ -1,5 +1,8 @@
 local M = {}
 
+-- TODO: add distinct parent for identical filenames
+-- TODO: fix tabs overflow (show only n next tabs aside the selected tab)
+
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local utils = require("core.utils")
 local mini_icons = require("mini.icons")
@@ -121,7 +124,7 @@ function M.render()
 
     for idx, bufnr in ipairs(buffers) do
         local is_current = bufnr == current_buf
-        local hl = is_current and "TabLineSel" or "TabLine"
+        local hl = is_current and HL.number_current[1] or "TabLine"
 
         -- Get buffer name
         local name = api.nvim_buf_get_name(bufnr)

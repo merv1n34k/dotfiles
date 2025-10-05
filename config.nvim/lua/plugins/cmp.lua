@@ -1,24 +1,14 @@
 require('luasnip').setup({})
 require('luasnip.loaders.from_vscode').lazy_load()
 
+local utils = require("core.utils")
+
 require('blink.cmp').setup({
     snippets = { preset = 'luasnip' },
 
     cmdline = {
         keymap = {
             ['Tab'] = { 'select_and_accept', 'fallback' },
-        },
-        enabled = true,
-        completion = {
-            menu = {
-                auto_show = function(ctx)
-                    local cmdtype = vim.fn.getcmdtype()
-                    if cmdtype == '/' or cmdtype == '?' then
-                        return false
-                    end
-                    return true
-                end,
-            }
         },
     },
 
@@ -30,26 +20,31 @@ require('blink.cmp').setup({
         list = {
             selection = {
                 preselect = true,
-                auto_insert = true
+                auto_insert = false
             }
         },
         menu = {
             auto_show = false,
+            min_width = 34,
+            max_height = 10,
             draw = {
-                columns = {
-                    { 'label',     'label_description', gap = 1 },
-                    { 'kind_icon', 'kind' },
+                treesitter = { "lsp" },
+                align_to = "cursor",
+                columns = { { "kind_icon" }, { "label", gap = 1 } },
+                components = {
+                    label = {
+                        text = function(ctx)
+                            return require("colorful-menu").blink_components_text(ctx)
+                        end,
+                        highlight = function(ctx)
+                            return require("colorful-menu").blink_components_highlight(ctx)
+                        end,
+                    },
                 },
             },
-            border = "rounded",
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
         },
         documentation = {
             auto_show = true,
-            window = {
-                border = "rounded",
-                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
-            },
         },
         ghost_text = { enabled = true },
     },
@@ -73,10 +68,21 @@ require('blink.cmp').setup({
         ['<Up>'] = { 'scroll_documentation_up', 'fallback' },
         ['<Down>'] = { 'scroll_documentation_down', 'fallback' },
     },
-
     sources = {
         default = { 'omni', 'cmdline', 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
+            cmdline = {
+                enabled = function()
+                    return vim.fn.getcmdtype() ~= "/" or not "?"
+                end,
+            },
+            path = {
+                opts = {
+                    get_cwd = function(_)
+                        return vim.fn.getcwd()
+                    end,
+                },
+            },
             thesaurus = {
                 name = 'blink-cmp-words',
                 module = 'blink-cmp-words.thesaurus',
@@ -116,6 +122,4 @@ require('blink.cmp').setup({
             markdown = { 'dictionary', 'thesaurus' },
         },
     },
-    appearance = { nerd_font_variant = 'normal' },
-    signature = { enabled = false }, -- Until they implement permanent toggling
 })
