@@ -9,7 +9,7 @@ vim.lsp.enable({
     "cmake",
     "yamlls",
     "bashls",
-    "ruff"
+    "ruff",
 })
 
 vim.diagnostic.config({
@@ -18,14 +18,6 @@ vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
     severity_sort = true,
-    float = {
-        focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-    },
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "x ",

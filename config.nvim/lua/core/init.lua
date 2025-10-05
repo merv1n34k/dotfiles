@@ -1,19 +1,19 @@
 -------------------------------------- Core modules --------------------------------------
 
 -------------------------------------- globals -------------------------------------------
-require "core.globals"
+require("core.globals")
 -------------------------------------- options -------------------------------------------
-require "core.options"
+require("core.options")
 -------------------------------------- autocmds ------------------------------------------
-require "core.autocommands"
+require("core.autocommands")
 -------------------------------------- misc ----------------------------------------------
 --vim.notify = require('mini.notify').setup()
 -------------------------------------- colorschemes --------------------------------------
-require "core.colorschemes"
+require("core.colorschemes")
 -------------------------------------- mappings ------------------------------------------
-require "core.mappings"
-require "core.plugins_settings"
+require("core.mappings")
+require("core.plugins_settings")
 -------------------------------------- lsp -----------------------------------------------
-require "core.lsp"
+require("core.lsp")
 
 -------------------------------------- THE END -------------------------------------------

@@ -7,6 +7,12 @@ return {
             },
             signatureHelp = { enabled = true },
             format = { enable = true },
+            diagnostics = {
+                globals = {
+                    "vim",
+                    "require",
+                },
+            },
         },
     },
 }
