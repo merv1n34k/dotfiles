@@ -3,11 +3,11 @@
 local g = vim.g
 
 g.python3_host_prog = "/usr/bin/python3"
-g.loaded_python3_provider = 1   -- Enable python3 provider
+g.loaded_python3_provider = 0   -- Enable python3 provider
 g.loaded_perl_provider = 0      -- Disable perl provider
 g.loaded_ruby_provider = 0      -- Disable ruby provider
 g.loaded_node_provider = 0      -- Disable node provider
-g.did_install_default_menus = 1 -- do not load menu
+g.did_install_default_menus = 0 -- do not load menu
 
 -- turn off deprecation messages
 vim.deprecate = function() end

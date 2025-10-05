@@ -58,9 +58,9 @@ opt.timeoutlen = 400
 opt.scrolloff = 5
 
 -- Spell
---opt.spell = true
---opt.spelllang = { "en", "uk", "med" }
---opt.syntax = "enable"
+opt.spell = true
+opt.spelllang = { "en", "uk", "med" }
+opt.syntax = "enable"
 
 -- Misc
 opt.completeopt = "menuone,noinsert"

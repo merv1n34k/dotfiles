@@ -13,6 +13,8 @@ return {
                     "require",
                 },
             },
+            ["completion.enable"] = false
         },
     },
+
 }

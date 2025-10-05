@@ -18,6 +18,7 @@ vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
     severity_sort = true,
+    float = false,
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "x ",
