@@ -1,7 +1,7 @@
 require('luasnip').setup({})
 require('luasnip.loaders.from_vscode').lazy_load()
 
-local utils = require("core.utils")
+require("colorful-menu").setup({})
 
 require('blink.cmp').setup({
     snippets = { preset = 'luasnip' },

@@ -1,15 +1,24 @@
 vim.lsp.enable({
+    -- Elixir
+    "nextls",
+    "elixir_ls",
+    -- Python
     "pyright",
+    "ruff",
+    -- Lua
     "lua_ls",
+    -- go
     "gopls",
+    -- R
     "r_language_server",
-    "clangd",
+    -- C
+    --"clangd",
+    -- Other
     "cssls",
     "html",
     "cmake",
     "yamlls",
     "bashls",
-    "ruff",
 })
 
 vim.diagnostic.config({

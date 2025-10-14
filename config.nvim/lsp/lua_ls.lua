@@ -16,5 +16,4 @@ return {
             ["completion.enable"] = false
         },
     },
-
 }

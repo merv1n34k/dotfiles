@@ -1,3 +1,4 @@
+-- native package manager
 vim.pack.add({
     { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
     { src = "https://github.com/NeogitOrg/neogit" },
@@ -33,6 +34,8 @@ vim.pack.add({
     { src = "https://github.com/echasnovski/mini.icons" },
     { src = "https://github.com/mcauley-penney/visual-whitespace.nvim" },
     { src = "https://github.com/xzbdmw/colorful-menu.nvim" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/catgoose/nvim-colorizer.lua" },
 })
 
 -- improve startup time
@@ -42,10 +45,8 @@ require("core") --[[ Init following settings:
 
   globals -- global settings
   options -- set default options for nvim
-  lazy -- lazy.nvim package manager
   autocommands -- various autocommands
   mappings -- all user-defined mappings
-  plugins_settings -- mappings for various plugins
   colorschemes -- colorscheme settings
   lsp -- native lsp support! Finally!
   utils -- useful utils :)
