@@ -17,7 +17,7 @@ opt.showtabline = 2
 opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.undofile = true
 opt.conceallevel = 2
-opt.textwidth = 80
+--opt.textwidth = 80
 opt.colorcolumn = "81"
 
 -- Indenting and folding
