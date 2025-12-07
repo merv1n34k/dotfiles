@@ -291,7 +291,8 @@ local function scrollbar_widget()
     local cur = api.nvim_win_get_cursor(0)[1]
     local total = api.nvim_buf_line_count(0)
     local idx = math.ceil(((cur - 1) / total) * 100)
-    return utils.hl_str("Substitute", tostring(idx) .. "%%")
+    local pos = vim.fn.getcursorcharpos()
+    return utils.hl_str("Substitute", tostring(idx) .. "%%") .. " " .. pos[2] .. ":" .. pos[3]
 end
 
 -- render ---------------------------------------------
