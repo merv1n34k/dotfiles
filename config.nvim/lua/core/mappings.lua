@@ -1,3 +1,5 @@
+local tabline = require("ui.tabline")
+
 local anymap = function(mode, key, effect, expr, desc)
     expr = expr or false
     desc = desc or nil
@@ -88,14 +90,34 @@ anymap({ "n", "x" }, "L", "g_")
 -- Save key strokes (now we do not need to press shift to enter command mode).
 anymap({ "n", "x" }, ";", ":")
 
+-- quick buffer save
 nmap("W", "<cmd>StripTrailingWhitespace<cr><cmd>w<cr>")
+-- quit and save
 nmap("Q", "<cmd>x<cr>")
+-- delete buffer (or tab)
 nmap("qq", "<cmd>bdelete<cr>")
+
+
+-- quick goto to tab
 nmap("t", function()
-    local tabline = require("ui.tabline")
     local count = vim.v.count1
     tabline.goto_tab(count)
 end, false)
+-- add fix_bug mark to tab
+nmap("tg", function() tabline.mark_tab("fix") end, false)
+-- add reference mark to tab
+nmap("tr", function() tabline.mark_tab("ref") end, false)
+-- add final_touch mark to tab
+nmap("tf", function() tabline.mark_tab("fin") end, false)
+-- clear mark for the tab
+nmap("tt", function() tabline.mark_tab(nil) end, false)
+
+-- navigate tabs (ui.tabline)
+nmap('<left>', "<cmd>Tcycleprev<cr>", false, "[tabline] cycle tab left")
+nmap('<right>', "<cmd>Tcyclenext<cr>", false, "[tabline] cycle tab right")
+nmap('<up>', "<cmd>Tmoveprev<cr>", false, "[tabline] move tab left")
+nmap('<down>', "<cmd>Tmovenext<cr>", false, "[tabline] move tab right")
+
 
 -------------------------------------- insert mode --------------------------------------
 
@@ -258,13 +280,6 @@ nmap("<leader>cd", "<cmd>set conceallevel=0<cr>", false, "[conceal] disable")
 nmap("<leader>ce", "<cmd>set conceallevel=2<cr>", false, "[conceal] enable")
 
 -- plugins mappings
----------------------------------------- Bufferline.nvim ----------------------------------
-
-nmap('<left>', "<cmd>Tcycleprev<cr>", false, "[tabline] cycle tab left")
-nmap('<right>', "<cmd>Tcyclenext<cr>", false, "[tabline] cycle tab right")
-nmap('<up>', "<cmd>Tmoveprev<cr>", false, "[tabline] move tab left")
-nmap('<down>', "<cmd>Tmovenext<cr>", false, "[tabline] move tab right")
-
 ---------------------------------------- whitespace.nvim ----------------------------------
 
 nmap("<space><space>", "<cmd>StripTrailingWhitespace<cr>", false, "[whitespace] strip trailing whitespaces")
