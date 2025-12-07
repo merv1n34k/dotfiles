@@ -1,7 +1,7 @@
 local M = {}
 
--- TODO: add distinct parent for identical filenames
--- TODO: fix tabs overflow (show only n next tabs aside the selected tab)
+-- TODO: add distinct parent for identical filenames (or indexes)
+-- Make sure tab structure is consistent, e.g. tab icon is not hidden
 
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local utils = require("core.utils")
@@ -13,6 +13,9 @@ vim.o.tabline = "%!v:lua.require('ui.tabline').render()"
 -- Highlight groups and icons setup
 local icons = utils.data.ui.icons
 local HL = {
+    fix = "Removed",
+    ref = "Added",
+    fin = "IncSearch",
     modified = { "DiagnosticError", icons.bullet },
     readonly = { "DiagnosticWarn", icons.lock },
     nomodifiable = { "DiagnosticWarn", icons.bullet },
@@ -31,6 +34,7 @@ end
 
 -- Buffer order storage
 local buffer_order = {}
+local buffer_marks = {}
 
 -- Check if buffer should be shown
 local function is_valid_buffer(bufnr)
@@ -120,27 +124,34 @@ function M.render()
         return ""
     end
 
-    local out = {}
+    -- Build all tabs first to measure widths
+    local tabs = {}
+    local current_idx = 1
 
     for idx, bufnr in ipairs(buffers) do
+        if bufnr == current_buf then
+            current_idx = idx
+        end
+
         local is_current = bufnr == current_buf
         local hl = is_current and HL.number_current[1] or "TabLine"
 
-        -- Get buffer name
+        -- mark the tab
+        if not is_current and buffer_marks[bufnr] then
+            hl = HL[buffer_marks[bufnr]] or hl
+        end
+
         local name = api.nvim_buf_get_name(bufnr)
         local display_name = name == "" and "[No Name]" or fn.fnamemodify(name, ":t")
         display_name = truncate_filename(display_name, 20)
 
-        -- Get icon and status
         local filetype = bo[bufnr].filetype
         local icon = get_file_icon(name, filetype)
         local status = get_status_indicator(bufnr)
 
-        -- Index icon with highlighting
         local index_hl = is_current and HL.number_current[1] or HL.number[1]
         local index_icon = utils.hl_str(index_hl, string.format("%d ", idx))
 
-        -- Build clickable tab
         local tab = string.format(
             "%%%dT%s %s%s %s%s %%T",
             bufnr,
@@ -151,7 +162,48 @@ function M.render()
             status
         )
 
-        table.insert(out, tab)
+        -- Approximate display width: idx + space + icon + space + name + status + padding
+        local width = #tostring(idx) + 3 + #display_name + (status ~= "" and 2 or 0) + 1
+
+        table.insert(tabs, { str = tab, width = width })
+    end
+
+    -- Calculate visible range based on window width
+    local total = #tabs
+    local available = api.nvim_get_option('columns') - 15 - #tostring(#tabs) * 2
+    local start_idx, end_idx = current_idx, current_idx
+    local used = tabs[current_idx].width
+
+    -- Expand outward from current tab
+    while true do
+        local left_fits = start_idx > 1 and used + tabs[start_idx - 1].width <= available
+        local right_fits = end_idx < total and used + tabs[end_idx + 1].width <= available
+
+        if not left_fits and not right_fits then break end
+
+        if left_fits then
+            start_idx = start_idx - 1
+            used = used + tabs[start_idx].width
+        end
+        if right_fits and used + tabs[end_idx + 1].width <= available then
+            end_idx = end_idx + 1
+            used = used + tabs[end_idx].width
+        end
+    end
+
+    -- Build output with overflow indicators
+    local out = {}
+
+    if start_idx > 1 then
+        table.insert(out, utils.hl_str("Comment", string.format("<%d ", start_idx - 1)))
+    end
+
+    for idx = start_idx, end_idx do
+        table.insert(out, tabs[idx].str)
+    end
+
+    if end_idx < total then
+        table.insert(out, utils.hl_str("Comment", string.format(" %d>", total - end_idx)))
     end
 
     return utils.hl_str("TabLineFill", " " .. icons.stack .. "    ")
@@ -165,6 +217,11 @@ function M.goto_tab(n)
     if buffers[n] then
         api.nvim_set_current_buf(buffers[n])
     end
+end
+
+function M.mark_tab(mark) -- use "fix", "ref", "fin", or nil
+    local current_buf = api.nvim_get_current_buf()
+    buffer_marks[current_buf] = mark
 end
 
 -- Cycle through buffers (positive = forward, negative = backward)
