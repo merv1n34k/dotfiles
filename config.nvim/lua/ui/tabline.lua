@@ -1,7 +1,6 @@
 local M = {}
 
--- TODO: add distinct parent for identical filenames (or indexes)
--- Make sure tab structure is consistent, e.g. tab icon is not hidden
+-- TODO: Make sure tab structure is consistent, e.g. tab icon is not hidden
 
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local utils = require("core.utils")
@@ -128,6 +127,13 @@ function M.render()
     local tabs = {}
     local current_idx = 1
 
+    local name_counts = {}
+    for _, bufnr in ipairs(buffers) do
+        local name = api.nvim_buf_get_name(bufnr)
+        local filename = name ~= "" and fn.fnamemodify(name, ":t") or ""
+        name_counts[filename] = (name_counts[filename] or 0) + 1
+    end
+
     for idx, bufnr in ipairs(buffers) do
         if bufnr == current_buf then
             current_idx = idx
@@ -142,8 +148,12 @@ function M.render()
         end
 
         local name = api.nvim_buf_get_name(bufnr)
-        local display_name = name == "" and "[No Name]" or fn.fnamemodify(name, ":t")
-        display_name = truncate_filename(display_name, 20)
+        local filename = name == "" and "[No Name]" or fn.fnamemodify(name, ":t")
+        local display_name = filename
+        if name_counts[filename] and name_counts[filename] > 1 then
+            display_name = fn.fnamemodify(name, ":h:t") .. "/" .. filename
+        end
+        display_name = truncate_filename(display_name, 25)
 
         local filetype = bo[bufnr].filetype
         local icon = get_file_icon(name, filetype)
