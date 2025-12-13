@@ -1,7 +1,5 @@
 local M = {}
 
--- TODO: Make sure tab structure is consistent, e.g. tab icon is not hidden
-
 local api, fn, bo = vim.api, vim.fn, vim.bo
 local utils = require("core.utils")
 local mini_icons = require("mini.icons")
@@ -180,7 +178,7 @@ function M.render()
 
     -- Calculate visible range based on window width
     local total = #tabs
-    local available = api.nvim_get_option('columns') - 15 - #tostring(#tabs) * 2
+    local available = api.nvim_get_option('columns') - 20 - #tostring(#tabs) * 2
     local start_idx, end_idx = current_idx, current_idx
     local used = tabs[current_idx].width
 
